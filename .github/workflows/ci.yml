@@ -7,7 +7,7 @@ on:
       - master  # Trigger on push to the master branch
 
 env:
-  GODOT_VERSION: 4.4.1
+  GODOT_VERSION: 4.6.2
   EXPORT_NAME: ludum-dare-59
   ITCH_IO_GAME: imtec/ludum-dare-59
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
@@ -32,13 +32,17 @@ jobs:
           mkdir -p ~/.local/share/godot
           mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
 
-      # Setp 3: Build Linux export
+       # Step 3: Run the GUT tests in headless mode
+      - name: Run GUT tests
+        run: godot --headless -s addons/gut/gut_cmdln.gd -glog=1 -gexit
+
+      # Setp 4: Build Linux export
       - name: Build linux config
         run: |
           mkdir -v -p build/linux
           godot --headless -v --export-release "Linux" build/linux/${EXPORT_NAME}-linux.x86_64
 
-      # Step 4: Publish the build to itch.io
+      # Step 5: Publish the build to itch.io
       - name: Publish to itch.io
         run: |
           butler -v
@@ -64,13 +68,17 @@ jobs:
           mkdir -p ~/.local/share/godot
           mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
 
-      # Setp 3: Build Windows export
+       # Step 3: Run the GUT tests in headless mode
+      - name: Run GUT tests
+        run: godot --headless -s addons/gut/gut_cmdln.gd -glog=1 -gexit
+
+      # Setp 4: Build Windows export
       - name: Build Windows config
         run: |
           mkdir -v -p build/windows
           godot --headless -v --export-release "Windows" build/windows/${EXPORT_NAME}-win.exe
 
-      # Step 4: Publish the build to itch.io
+      # Step 5: Publish the build to itch.io
       - name: Publish to itch.io
         run: |
           butler -v
@@ -96,7 +104,11 @@ jobs:
           mkdir -p ~/.local/share/godot
           mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
 
-      # Setp 3: Build MacOS export
+       # Step 3: Run the GUT tests in headless mode
+      - name: Run GUT tests
+        run: godot --headless -s addons/gut/gut_cmdln.gd -glog=1 -gexit
+
+      # Setp 4 Build MacOS export
       - name: Build MacOS config
         run: |
           mkdir -v -p build/mac
