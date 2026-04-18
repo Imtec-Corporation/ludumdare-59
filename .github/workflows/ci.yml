@@ -1,0 +1,110 @@
+name: Build pipeline
+# This is a GitHub Actions workflow file for building and publishing a Godot project to itch.io.
+
+on:
+  push:
+    branches:
+      - master  # Trigger on push to the master branch
+
+env:
+  GODOT_VERSION: 4.4.1
+  EXPORT_NAME: ludum-dare-59
+  ITCH_IO_GAME: imtec/ludum-dare-59
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+
+jobs:
+  linux-build:
+    name: Linux Build
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    container:
+      image: barichello/godot-ci:4.4.1
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+       # Step 2: Create an alias for Godot executable (correct path)
+      - name: Copy root config
+        run: |
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mkdir -p ~/.local/share/godot
+          mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
+
+      # Setp 3: Build Linux export
+      - name: Build linux config
+        run: |
+          mkdir -v -p build/linux
+          godot --headless -v --export-release "Linux" build/linux/${EXPORT_NAME}-linux.x86_64
+
+      # Step 4: Publish the build to itch.io
+      - name: Publish to itch.io
+        run: |
+          butler -v
+          butler login
+          butler push build/linux ${ITCH_IO_GAME}:linux
+
+  windows-build:
+    name: Windows Build
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    container:
+      image: barichello/godot-ci:4.4.1
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+       # Step 2: Create an alias for Godot executable (correct path)
+      - name: Copy root config
+        run: |
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mkdir -p ~/.local/share/godot
+          mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
+
+      # Setp 3: Build Windows export
+      - name: Build Windows config
+        run: |
+          mkdir -v -p build/windows
+          godot --headless -v --export-release "Windows" build/windows/${EXPORT_NAME}-win.exe
+
+      # Step 4: Publish the build to itch.io
+      - name: Publish to itch.io
+        run: |
+          butler -v
+          butler login
+          butler push build/windows ${ITCH_IO_GAME}:win
+
+  mac-build:
+    name: MacOS Build
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    container:
+      image: barichello/godot-ci:4.4.1
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+       # Step 2: Create an alias for Godot executable (correct path)
+      - name: Copy root config
+        run: |
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mkdir -p ~/.local/share/godot
+          mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
+
+      # Setp 3: Build MacOS export
+      - name: Build MacOS config
+        run: |
+          mkdir -v -p build/mac
+          godot --headless -v --export-release "mac" build/mac/${EXPORT_NAME}-mac.zip
+
+      # Step 5: Publish the build to itch.io
+      - name: Publish to itch.io
+        run: |
+          butler -v
+          butler login
+          butler push build/mac ${ITCH_IO_GAME}:mac
