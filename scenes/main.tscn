@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://dsj22t33qtkif"]
+
+[ext_resource type="Script" uid="uid://ccw470w11fg60" path="res://src/controller/game_controller.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://um715i1ogsky" path="res://src/controller/display_controller.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://clwnibpbfrknq" path="res://src/controller/freq_slider_controller.gd" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://v008qlx7gn4k" path="res://src/controller/amp_slider_controller.gd" id="4_jyhfs"]
+
+[node name="Root" type="Node" unique_id=1443240716]
+script = ExtResource("1_o5qli")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1944688371]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="UI" type="VBoxContainer" parent="." unique_id=1965359138]
+offset_right = 1150.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DataRow" type="HBoxContainer" parent="UI" unique_id=32273225]
+layout_mode = 2
+
+[node name="SatNameLabel" type="Label" parent="UI/DataRow" unique_id=37930636]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lorem ipsum"
+
+[node name="SatCoordLabel" type="Label" parent="UI/DataRow" unique_id=11483125]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "dolor sit amet"
+
+[node name="DataLabel" type="Label" parent="UI/DataRow" unique_id=1963129936]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "foo bar"
+
+[node name="HSeparator" type="HSeparator" parent="UI" unique_id=423026749]
+layout_mode = 2
+
+[node name="SyncPanel" type="CenterContainer" parent="UI" unique_id=729168382]
+layout_mode = 2
+
+[node name="SyncContainer" type="HBoxContainer" parent="UI/SyncPanel" unique_id=1636831570]
+layout_mode = 2
+
+[node name="SyncLabel" type="Label" parent="UI/SyncPanel/SyncContainer" unique_id=38769509]
+layout_mode = 2
+text = "SYNC
+"
+max_lines_visible = 1
+
+[node name="SyncRect" type="ColorRect" parent="UI/SyncPanel/SyncContainer" unique_id=470826054]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+color = Color(0.69919544, 2.0816549e-06, 6.738305e-07, 1)
+
+[node name="HSeparator2" type="HSeparator" parent="UI" unique_id=615924370]
+layout_mode = 2
+
+[node name="Display" type="Control" parent="UI" unique_id=1259243778]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_0wfyh")
+satellite_line_color = Color(5.7756904e-07, 0.9576177, 0.5308921, 0.7490196)
+satellite_line_width = 0.5
+
+[node name="ControlArea" type="HBoxContainer" parent="UI" unique_id=449503341]
+layout_mode = 2
+
+[node name="Messages" type="VBoxContainer" parent="UI/ControlArea" unique_id=925138137]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controls" type="VBoxContainer" parent="UI/ControlArea" unique_id=2031840487]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FreqLabel" type="Label" parent="UI/ControlArea/Controls" unique_id=1874983205]
+layout_mode = 2
+text = "Signal Frequency"
+
+[node name="FreqSlider" type="HSlider" parent="UI/ControlArea/Controls" unique_id=2074031938]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+script = ExtResource("3_sugp2")
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlArea/Controls" unique_id=777653222]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlArea/Controls" unique_id=355112199]
+layout_mode = 2
+text = "Signal Amplitude"
+
+[node name="AmpSlider" type="HSlider" parent="UI/ControlArea/Controls" unique_id=1346252059]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+script = ExtResource("4_jyhfs")
+
+[connection signal="value_changed" from="UI/ControlArea/Controls/FreqSlider" to="UI/ControlArea/Controls/FreqSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="UI/ControlArea/Controls/AmpSlider" to="UI/ControlArea/Controls/AmpSlider" method="_on_value_changed"]
