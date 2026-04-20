@@ -11,6 +11,7 @@ func _bind_station() -> void:
 	# Root owns `station` (see `GameController` on the scene root in `scenes/main.tscn`).
 	var game_root := get_node("../../../..") as Node
 	station = game_root.get("station") as Station
+	self.value = station.satSignal.frequency
 
 func _on_value_changed(_float) -> void:
 	if station == null:

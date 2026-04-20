@@ -14,6 +14,7 @@ func _ready() -> void:
 	
 func _process(_float) -> void:
 	display.update_signals(self.station.satSignal, self.station.satellite.satSignal)
+	self.station.update()
 	writeData()
 
 func writeData() -> void:

@@ -2,8 +2,19 @@
 
 [ext_resource type="Script" uid="uid://ccw470w11fg60" path="res://src/controller/game_controller.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://um715i1ogsky" path="res://src/controller/display_controller.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://bgdfix2tchnxx" path="res://src/controller/sync_led_controller.gd" id="2_tbgi4"]
+[ext_resource type="Theme" uid="uid://d2eue2i6cy0tx" path="res://themes/default.tres" id="2_tefeu"]
 [ext_resource type="Script" uid="uid://clwnibpbfrknq" path="res://src/controller/freq_slider_controller.gd" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://v008qlx7gn4k" path="res://src/controller/amp_slider_controller.gd" id="4_jyhfs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+bg_color = Color(0.61, 0.1586, 0.1586, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+bg_color = Color(0.41, 0.081999995, 0.081999995, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+bg_color = Color(0.66, 0.2112, 0.2112, 1)
 
 [node name="Root" type="Node" unique_id=1443240716]
 script = ExtResource("1_o5qli")
@@ -31,16 +42,19 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "lorem ipsum"
+horizontal_alignment = 1
 
 [node name="SatCoordLabel" type="Label" parent="UI/DataRow" unique_id=11483125]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "dolor sit amet"
+horizontal_alignment = 1
 
 [node name="DataLabel" type="Label" parent="UI/DataRow" unique_id=1963129936]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "foo bar"
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="UI" unique_id=423026749]
 layout_mode = 2
@@ -53,6 +67,7 @@ layout_mode = 2
 
 [node name="SyncLabel" type="Label" parent="UI/SyncPanel/SyncContainer" unique_id=38769509]
 layout_mode = 2
+theme = ExtResource("2_tefeu")
 text = "SYNC
 "
 max_lines_visible = 1
@@ -61,6 +76,7 @@ max_lines_visible = 1
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 color = Color(0.69919544, 2.0816549e-06, 6.738305e-07, 1)
+script = ExtResource("2_tbgi4")
 
 [node name="HSeparator2" type="HSeparator" parent="UI" unique_id=615924370]
 layout_mode = 2
@@ -72,12 +88,38 @@ script = ExtResource("2_0wfyh")
 satellite_line_color = Color(5.7756904e-07, 0.9576177, 0.5308921, 0.7490196)
 satellite_line_width = 0.5
 
-[node name="ControlArea" type="HBoxContainer" parent="UI" unique_id=449503341]
+[node name="ProgressBar" type="ProgressBar" parent="UI" unique_id=1668506237]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+value = 100.0
+show_percentage = false
+
+[node name="HSeparator3" type="HSeparator" parent="UI" unique_id=1979134160]
 layout_mode = 2
 
-[node name="Messages" type="VBoxContainer" parent="UI/ControlArea" unique_id=925138137]
+[node name="ControlArea" type="HBoxContainer" parent="UI" unique_id=449503341]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ControlArea" unique_id=539593875]
 layout_mode = 2
 size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MsgContainer" type="VBoxContainer" parent="UI/ControlArea/ScrollContainer" unique_id=899855849]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ConsoleTitle" type="Label" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=1907519737]
+layout_mode = 2
+text = "A.I. Defense protocol v4.1"
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=25353007]
+layout_mode = 2
 
 [node name="Controls" type="VBoxContainer" parent="UI/ControlArea" unique_id=2031840487]
 layout_mode = 2
@@ -105,6 +147,28 @@ layout_mode = 2
 max_value = 10.0
 step = 0.1
 script = ExtResource("4_jyhfs")
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ControlArea/Controls" unique_id=1052219576]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="UI/ControlArea/Controls" unique_id=190029058]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConnectButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=2071063007]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "CONNECT"
+
+[node name="PurgeButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=1952172317]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o6xl0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tipki")
+text = "Purge"
 
 [connection signal="value_changed" from="UI/ControlArea/Controls/FreqSlider" to="UI/ControlArea/Controls/FreqSlider" method="_on_value_changed"]
 [connection signal="value_changed" from="UI/ControlArea/Controls/AmpSlider" to="UI/ControlArea/Controls/AmpSlider" method="_on_value_changed"]

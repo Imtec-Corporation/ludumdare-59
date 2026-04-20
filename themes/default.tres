@@ -1,0 +1,52 @@
+[gd_resource type="Theme" format=3 uid="uid://d2eue2i6cy0tx"]
+
+[ext_resource type="FontFile" uid="uid://dhxkvkd0jw4a2" path="res://fonts/Silkscreen-Regular.ttf" id="1_2g1ym"]
+[ext_resource type="Texture2D" uid="uid://dylby5kbkca3l" path="res://gfx/slider_box.png" id="1_gnsgt"]
+[ext_resource type="Texture2D" uid="uid://c8tsd33bxeevg" path="res://gfx/slider_box_disabled.png" id="2_l6fbw"]
+[ext_resource type="Texture2D" uid="uid://ib4hildxv6db" path="res://gfx/slider_box_highlighted.png" id="3_5hd2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1vgm"]
+bg_color = Color(0.27103996, 0.66, 0.2112, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgbfu"]
+bg_color = Color(0.2187866, 0.61, 0.1586, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck2yl"]
+bg_color = Color(0.12573329, 0.41, 0.081999995, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_l6fbw"]
+color = Color(0.12418323, 0.46774423, 0.11865174, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hd2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3e7e"]
+bg_color = Color(0.68586, 0.71, 0.22719999, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6fbw"]
+bg_color = Color(0.08479999, 0.14872, 0.16, 0.75686276)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.045, 0.12699997, 0.25, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[resource]
+default_font = ExtResource("1_2g1ym")
+Button/styles/hover = SubResource("StyleBoxFlat_k1vgm")
+Button/styles/normal = SubResource("StyleBoxFlat_cgbfu")
+Button/styles/pressed = SubResource("StyleBoxFlat_ck2yl")
+HSeparator/constants/separation = 10
+HSeparator/styles/separator = SubResource("StyleBoxLine_l6fbw")
+HSlider/icons/grabber = ExtResource("1_gnsgt")
+HSlider/icons/grabber_disabled = ExtResource("2_l6fbw")
+HSlider/icons/grabber_highlight = ExtResource("3_5hd2i")
+Label/colors/font_color = Color(0.44708145, 0.7471354, 0.31803852, 1)
+ProgressBar/styles/background = SubResource("StyleBoxFlat_5hd2i")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_d3e7e")
+ScrollContainer/styles/panel = SubResource("StyleBoxFlat_l6fbw")
