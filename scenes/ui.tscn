@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://dsj22t33qtkif"]
+
+[ext_resource type="Script" uid="uid://ccw470w11fg60" path="res://src/controller/game_controller.gd" id="1_ktti3"]
+[ext_resource type="Theme" uid="uid://d2eue2i6cy0tx" path="res://themes/default.tres" id="2_cgfq5"]
+[ext_resource type="Script" uid="uid://bgdfix2tchnxx" path="res://src/controller/sync_led_controller.gd" id="3_7dvkv"]
+[ext_resource type="Script" uid="uid://um715i1ogsky" path="res://src/controller/display_controller.gd" id="4_vdcm2"]
+[ext_resource type="Script" uid="uid://o2sutexqhrmb" path="res://src/controller/message_controller.gd" id="5_6rmj2"]
+[ext_resource type="Script" uid="uid://clwnibpbfrknq" path="res://src/controller/freq_slider_controller.gd" id="6_vsj0x"]
+[ext_resource type="Script" uid="uid://v008qlx7gn4k" path="res://src/controller/amp_slider_controller.gd" id="7_qsv74"]
+[ext_resource type="Script" uid="uid://djigvpcpdp0x5" path="res://src/controller/connect_controller.gd" id="8_h1mc3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ktti3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+bg_color = Color(0.61, 0.1586, 0.1586, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+bg_color = Color(0.41, 0.081999995, 0.081999995, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+bg_color = Color(0.66, 0.2112, 0.2112, 1)
+
+[node name="Root" type="Control" unique_id=1541931026]
+material = SubResource("CanvasItemMaterial_ktti3")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ktti3")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1944688371]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="UI" type="VBoxContainer" parent="." unique_id=1965359138]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DataRow" type="HBoxContainer" parent="UI" unique_id=32273225]
+layout_mode = 2
+
+[node name="SatNameLabel" type="Label" parent="UI/DataRow" unique_id=37930636]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lorem ipsum"
+horizontal_alignment = 1
+
+[node name="SatCoordLabel" type="Label" parent="UI/DataRow" unique_id=11483125]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "dolor sit amet"
+horizontal_alignment = 1
+
+[node name="DataLabel" type="Label" parent="UI/DataRow" unique_id=1963129936]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "foo bar"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI" unique_id=423026749]
+layout_mode = 2
+
+[node name="SyncPanel" type="CenterContainer" parent="UI" unique_id=729168382]
+layout_mode = 2
+
+[node name="SyncContainer" type="HBoxContainer" parent="UI/SyncPanel" unique_id=1636831570]
+layout_mode = 2
+
+[node name="SyncLabel" type="Label" parent="UI/SyncPanel/SyncContainer" unique_id=38769509]
+layout_mode = 2
+theme = ExtResource("2_cgfq5")
+text = "SYNC
+"
+max_lines_visible = 1
+
+[node name="SyncRect" type="ColorRect" parent="UI/SyncPanel/SyncContainer" unique_id=470826054]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+color = Color(0.69919544, 2.0816549e-06, 6.738305e-07, 1)
+script = ExtResource("3_7dvkv")
+
+[node name="HSeparator2" type="HSeparator" parent="UI" unique_id=615924370]
+layout_mode = 2
+
+[node name="Display" type="Control" parent="UI" unique_id=1259243778]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_vdcm2")
+satellite_line_color = Color(5.7756904e-07, 0.9576177, 0.5308921, 0.7490196)
+satellite_line_width = 0.5
+
+[node name="SyncProgress" type="ProgressBar" parent="UI" unique_id=1668506237]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+value = 100.0
+show_percentage = false
+
+[node name="HSeparator3" type="HSeparator" parent="UI" unique_id=1979134160]
+layout_mode = 2
+
+[node name="ControlArea" type="HBoxContainer" parent="UI" unique_id=449503341]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ControlArea" unique_id=539593875]
+layout_mode = 2
+size_flags_horizontal = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MsgContainer" type="VBoxContainer" parent="UI/ControlArea/ScrollContainer" unique_id=899855849]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_6rmj2")
+
+[node name="ConsoleTitle" type="Label" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=1907519737]
+layout_mode = 2
+text = "A.I. Defense protocol v4.1"
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=25353007]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="UI/ControlArea" unique_id=2031840487]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FreqLabel" type="Label" parent="UI/ControlArea/Controls" unique_id=1874983205]
+layout_mode = 2
+text = "Signal Frequency"
+
+[node name="FreqSlider" type="HSlider" parent="UI/ControlArea/Controls" unique_id=2074031938]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+script = ExtResource("6_vsj0x")
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlArea/Controls" unique_id=777653222]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlArea/Controls" unique_id=355112199]
+layout_mode = 2
+text = "Signal Amplitude"
+
+[node name="AmpSlider" type="HSlider" parent="UI/ControlArea/Controls" unique_id=1346252059]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+script = ExtResource("7_qsv74")
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ControlArea/Controls" unique_id=1052219576]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="UI/ControlArea/Controls" unique_id=190029058]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConnectButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=2071063007]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "CONNECT"
+script = ExtResource("8_h1mc3")
+
+[node name="PurgeButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=1952172317]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o6xl0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tipki")
+text = "Purge"
+
+[node name="SyncTimer" type="Timer" parent="." unique_id=427876320]
+wait_time = 20.0
+autostart = true
+
+[connection signal="value_changed" from="UI/ControlArea/Controls/FreqSlider" to="UI/ControlArea/Controls/FreqSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="UI/ControlArea/Controls/AmpSlider" to="UI/ControlArea/Controls/AmpSlider" method="_on_value_changed"]
+[connection signal="timeout" from="SyncTimer" to="." method="_on_sync_timer_timeout"]

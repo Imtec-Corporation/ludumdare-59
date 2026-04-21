@@ -48,16 +48,18 @@ bg_color = Color(0.054000005, 0.16320002, 0.18, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywx0d"]
 bg_color = Color(0.0627451, 0.11372549, 0.12156863, 1)
-border_width_left = 2
-border_width_right = 2
+border_width_left = 4
+border_width_right = 4
 border_color = Color(0.012, 0.03626667, 0.04, 1)
 corner_detail = 1
 
 [resource]
 default_font = ExtResource("1_2g1ym")
+BoxContainer/constants/separation = 10
 Button/styles/hover = SubResource("StyleBoxFlat_k1vgm")
 Button/styles/normal = SubResource("StyleBoxFlat_cgbfu")
 Button/styles/pressed = SubResource("StyleBoxFlat_ck2yl")
+HBoxContainer/constants/separation = 10
 HSeparator/constants/separation = 10
 HSeparator/styles/separator = SubResource("StyleBoxLine_l6fbw")
 HSlider/icons/grabber = ExtResource("1_gnsgt")
@@ -67,6 +69,7 @@ Label/colors/font_color = Color(0.44708145, 0.7471354, 0.31803852, 1)
 ProgressBar/styles/background = SubResource("StyleBoxFlat_5hd2i")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_d3e7e")
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_l6fbw")
+VBoxContainer/constants/separation = 10
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_0qmv4")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_8j4t7")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_nlad3")

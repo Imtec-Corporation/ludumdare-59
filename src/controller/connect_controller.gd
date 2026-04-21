@@ -1,15 +1,19 @@
 class_name ConnectController
 extends Button
 
-var station: Station
+var synced: bool
 
 func _ready() -> void:
 	self.text = "Connect"
 	self.connect("pressed", self.on_connect_pressed)
-	self.station = get_tree().root.get_node("Root").station as Station
+	SyncEvent.register(self._on_sync)
+	synced = false
 
 func on_connect_pressed() -> void:
-	if self.station.synced:
+	if synced:
 		DataEvent.emit()
 	else:
 		MessageEvent.emit("Data link not available", true)
+		
+func _on_sync(s: bool) -> void:
+	synced = s
