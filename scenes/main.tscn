@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://fwqeua2lbfgk" path="res://src/controller/orbit_controller.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dsj22t33qtkif" path="res://scenes/ui.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://h5g750py30dt" path="res://src/controller/ship_controller.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/camera_controller.gd" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dk56s6rv3odrv" path="res://gfx/textures/2k_earth_daymap.jpg" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dgiy4qihtwkfb" path="res://gfx/textures/2k_earth_normal_map.png" id="7_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://btvp1ei6sfcxc" path="res://gfx/textures/2k_earth_specular_map.png" id="8_tipki"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o5qli"]
 viewport_path = NodePath("OrbitPivot/Ship/UI")
@@ -11,27 +15,26 @@ viewport_path = NodePath("OrbitPivot/Ship/UI")
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
 size = Vector3(11.010452, 7.547058, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0wfyh"]
-noise_type = 3
-seed = 6
-frequency = 1.0
+[sub_resource type="Gradient" id="Gradient_tbgi4"]
+offsets = PackedFloat32Array(0.29166666, 0.9166667, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sugp2"]
-noise = SubResource("FastNoiseLite_0wfyh")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
+noise_type = 2
+frequency = 0.5
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
-sky_top_color = Color(0, 0, 0, 1)
-sky_horizon_color = Color(0, 0, 0, 1)
-sky_cover = SubResource("NoiseTexture2D_sugp2")
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0, 0, 0, 1)
-ground_curve = 1e-05
-sun_angle_max = 6.92
-sun_curve = 0.5795625
-energy_multiplier = 54.33
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tbgi4"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_tefeu")
+color_ramp = SubResource("Gradient_tbgi4")
+seamless = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tefeu"]
+panorama = SubResource("NoiseTexture2D_tbgi4")
 
 [sub_resource type="Sky" id="Sky_0wfyh"]
-sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+sky_material = SubResource("PanoramaSkyMaterial_tefeu")
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
@@ -46,10 +49,17 @@ glow_intensity = 1.0
 [sub_resource type="SphereMesh" id="SphereMesh_0wfyh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
-albedo_color = Color(0.10399999, 0.3397333, 0.52, 1)
+albedo_color = Color(0.8751805, 0.93458873, 0.98956996, 1)
+albedo_texture = ExtResource("6_tefeu")
 emission_enabled = true
 emission = Color(0.2795, 0.48327506, 0.65, 1)
 emission_energy_multiplier = 0.07
+emission_texture = ExtResource("8_tipki")
+normal_enabled = true
+normal_texture = ExtResource("7_o6xl0")
+refraction_enabled = true
+refraction_scale = 1.0
+refraction_texture = ExtResource("8_tipki")
 
 [node name="Main" type="Node3D" unique_id=1522386376]
 
@@ -82,6 +92,7 @@ render_target_update_mode = 4
 [node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship" unique_id=1489622258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.272937, 7.0625706)
 environment = SubResource("Environment_0wfyh")
+script = ExtResource("5_tbgi4")
 
 [node name="Earth" type="MeshInstance3D" parent="." unique_id=477472100]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
