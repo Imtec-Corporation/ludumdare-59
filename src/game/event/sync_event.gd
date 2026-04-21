@@ -17,3 +17,7 @@ static func unregister(listener: Callable) -> void:
 static func emit(sync: bool) -> void:
     print_debug("Sync: ", sync)
     get_instance().wave_synced.emit(sync)
+    if sync:
+        MessageEvent.emit("Synchronization complete")
+    else:
+        MessageEvent.emit("Synchronization lost", true)

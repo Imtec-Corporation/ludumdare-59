@@ -6,6 +6,7 @@ var station: Station
 func _ready() -> void:
 	# `GameController._ready()` runs after child `_ready()` callbacks, so we bind on the next idle step.
 	call_deferred("_bind_station")
+	ResetEvent.register(self._on_reset_requested)
 
 func _bind_station() -> void:
 	# Root owns `station` (see `GameController` on the scene root in `scenes/main.tscn`).
@@ -17,3 +18,6 @@ func _on_value_changed(_float) -> void:
 	if station == null:
 		return
 	station.satSignal.frequency = value
+
+func _on_reset_requested() -> void:
+	self.value = station.satSignal.frequency
