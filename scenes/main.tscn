@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dsj22t33qtkif" path="res://scenes/ui.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://h5g750py30dt" path="res://src/controller/ship_controller.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cgp648wh2vf2u" path="res://mesh/station.glb" id="3_85g3d"]
+[ext_resource type="PackedScene" uid="uid://cbi4ild5atubp" path="res://mesh/chair.glb" id="4_choun"]
+[ext_resource type="PackedScene" uid="uid://0jc18c0bubqn" path="res://mesh/console.glb" id="4_ya4ey"]
 [ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/camera_controller.gd" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dk56s6rv3odrv" path="res://gfx/textures/2k_earth_daymap.jpg" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dgiy4qihtwkfb" path="res://gfx/textures/2k_earth_normal_map.png" id="7_o6xl0"]
@@ -52,6 +54,15 @@ viewport_path = NodePath("OrbitPivot/Ship/station/UI")
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
 size = Vector3(11.010452, 7.547058, 1)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_85g3d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85g3d"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.043137256)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+
 [sub_resource type="SphereMesh" id="SphereMesh_0wfyh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
@@ -79,6 +90,16 @@ script = ExtResource("1_sugp2")
 
 [node name="station" parent="OrbitPivot/Ship" unique_id=985176379 instance=ExtResource("3_85g3d")]
 
+[node name="console" parent="OrbitPivot/Ship/station" unique_id=992104500 instance=ExtResource("4_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 0.96898985, -0.24710038, 0, 0.24710038, 0.96898985, 0, 0.62361145, -0.9506073)
+
+[node name="chair" parent="OrbitPivot/Ship/station" unique_id=12806026 instance=ExtResource("4_choun")]
+transform = Transform3D(-0.99753106, 0.021726875, 0.066781186, 0.042521443, 0.94367254, 0.32813728, -0.055890173, 0.33016664, -0.9422666, 0, 0, 0)
+
+[node name="AmbientLight" type="OmniLight3D" parent="OrbitPivot/Ship/station" unique_id=321290974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4208755, -0.13552856)
+omni_range = 2.014159
+
 [node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship/station" unique_id=1489622258]
 transform = Transform3D(1, 0, 0, 0, 0.98579156, -0.16797325, 0, 0.16797325, 0.98579156, -0.015185356, 1.4846954, -0.30680847)
 environment = SubResource("Environment_0wfyh")
@@ -103,9 +124,10 @@ render_target_update_mode = 4
 
 [node name="Root" parent="OrbitPivot/Ship/station/UI" unique_id=1443240716 instance=ExtResource("1_o5qli")]
 
-[node name="AmbientLight" type="OmniLight3D" parent="OrbitPivot/Ship" unique_id=321290974]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4208755, -0.13552856)
-omni_range = 2.014159
+[node name="Glass" type="MeshInstance3D" parent="OrbitPivot/Ship/station" unique_id=703604530]
+transform = Transform3D(-6.119594e-08, 0.121, 0, -1.4, -5.289078e-09, 0, 0, 0, 1.4, -2.5973575, 1.5081482, -0.005706787)
+mesh = SubResource("CylinderMesh_85g3d")
+surface_material_override/0 = SubResource("StandardMaterial3D_85g3d")
 
 [node name="Earth" type="MeshInstance3D" parent="." unique_id=477472100]
 transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 0, 0, 0)
