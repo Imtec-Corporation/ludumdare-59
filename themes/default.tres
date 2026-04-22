@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ib4hildxv6db" path="res://gfx/slider_box_highlighted.png" id="3_5hd2i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1vgm"]
-bg_color = Color(0.27103996, 0.66, 0.2112, 1)
+bg_color = Color(0.47242662, 0.86, 0.4128, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgbfu"]
 bg_color = Color(0.2187866, 0.61, 0.1586, 1)

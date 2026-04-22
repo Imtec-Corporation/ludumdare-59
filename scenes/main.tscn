@@ -4,16 +4,11 @@
 [ext_resource type="Script" uid="uid://fwqeua2lbfgk" path="res://src/controller/orbit_controller.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dsj22t33qtkif" path="res://scenes/ui.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://h5g750py30dt" path="res://src/controller/ship_controller.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cgp648wh2vf2u" path="res://mesh/station.glb" id="3_85g3d"]
 [ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/camera_controller.gd" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dk56s6rv3odrv" path="res://gfx/textures/2k_earth_daymap.jpg" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dgiy4qihtwkfb" path="res://gfx/textures/2k_earth_normal_map.png" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://btvp1ei6sfcxc" path="res://gfx/textures/2k_earth_specular_map.png" id="8_tipki"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_o5qli"]
-viewport_path = NodePath("OrbitPivot/Ship/UI")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
-size = Vector3(11.010452, 7.547058, 1)
 
 [sub_resource type="Gradient" id="Gradient_tbgi4"]
 offsets = PackedFloat32Array(0.29166666, 0.9166667, 1)
@@ -39,12 +34,23 @@ sky_material = SubResource("PanoramaSkyMaterial_tefeu")
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
 sky = SubResource("Sky_0wfyh")
-ambient_light_source = 2
+ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.02
+ambient_light_energy = 1.24
 reflected_light_source = 2
 glow_enabled = true
 glow_intensity = 1.0
+fog_mode = 1
+fog_light_color = Color(0.6999166, 0.25900003, 0.74, 1)
+fog_light_energy = 0.05
+fog_density = 1.0
+fog_depth_curve = 3.732134
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o5qli"]
+viewport_path = NodePath("OrbitPivot/Ship/station/UI")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
+size = Vector3(11.010452, 7.547058, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0wfyh"]
 
@@ -65,37 +71,44 @@ refraction_texture = ExtResource("8_tipki")
 
 [node name="OrbitPivot" type="Node3D" parent="." unique_id=1785156259]
 script = ExtResource("1_jyhfs")
+speed = 0.02
 
 [node name="Ship" type="Node3D" parent="OrbitPivot" unique_id=1292272975]
-transform = Transform3D(1, 0, 0, 0, 0.3093821, 0.9509378, 0, -0.9509378, 0.3093821, 0, 72.18715, 0)
+transform = Transform3D(1, 0, 0, 0, 0.3093821, 0.9509378, 0, -0.9509378, 0.3093821, 0, 200, 0)
 script = ExtResource("1_sugp2")
 
-[node name="Screen" type="Sprite3D" parent="OrbitPivot/Ship" unique_id=21806545 node_paths=PackedStringArray("viewPort")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.06742, 0)
+[node name="station" parent="OrbitPivot/Ship" unique_id=985176379 instance=ExtResource("3_85g3d")]
+
+[node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship/station" unique_id=1489622258]
+transform = Transform3D(1, 0, 0, 0, 0.98579156, -0.16797325, 0, 0.16797325, 0.98579156, -0.015185356, 1.4846954, -0.30680847)
+environment = SubResource("Environment_0wfyh")
+script = ExtResource("5_tbgi4")
+
+[node name="Screen" type="Sprite3D" parent="OrbitPivot/Ship/station" unique_id=21806545 node_paths=PackedStringArray("viewPort")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, -1.8626451e-09, 0, 1.8626451e-09, 0.1, 0, 1.6115417, -0.9700012)
 texture = SubResource("ViewportTexture_o5qli")
 script = ExtResource("1_0wfyh")
 viewPort = NodePath("../UI")
 
-[node name="Area3D" type="Area3D" parent="OrbitPivot/Ship/Screen" unique_id=727302336]
+[node name="Area3D" type="Area3D" parent="OrbitPivot/Ship/station/Screen" unique_id=727302336]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OrbitPivot/Ship/Screen/Area3D" unique_id=278560926]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OrbitPivot/Ship/station/Screen/Area3D" unique_id=278560926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013008118, -0.009063721, 0)
 shape = SubResource("BoxShape3D_o5qli")
 
-[node name="UI" type="SubViewport" parent="OrbitPivot/Ship" unique_id=1448827747]
+[node name="UI" type="SubViewport" parent="OrbitPivot/Ship/station" unique_id=1448827747]
 transparent_bg = true
 size = Vector2i(1100, 750)
 render_target_update_mode = 4
 
-[node name="Root" parent="OrbitPivot/Ship/UI" unique_id=1443240716 instance=ExtResource("1_o5qli")]
+[node name="Root" parent="OrbitPivot/Ship/station/UI" unique_id=1443240716 instance=ExtResource("1_o5qli")]
 
-[node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship" unique_id=1489622258]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.272937, 7.0625706)
-environment = SubResource("Environment_0wfyh")
-script = ExtResource("5_tbgi4")
+[node name="AmbientLight" type="OmniLight3D" parent="OrbitPivot/Ship" unique_id=321290974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4208755, -0.13552856)
+omni_range = 2.014159
 
 [node name="Earth" type="MeshInstance3D" parent="." unique_id=477472100]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 0, 0, 0)
 gi_mode = 2
 mesh = SubResource("SphereMesh_0wfyh")
 surface_material_override/0 = SubResource("StandardMaterial3D_0wfyh")
@@ -107,4 +120,4 @@ shadow_bias = 0.725
 shadow_normal_bias = 0.542
 shadow_transmittance_bias = 1.05
 
-[connection signal="input_event" from="OrbitPivot/Ship/Screen/Area3D" to="OrbitPivot/Ship/Screen" method="_on_area_3d_input_event"]
+[connection signal="input_event" from="OrbitPivot/Ship/station/Screen/Area3D" to="OrbitPivot/Ship/station/Screen" method="_on_area_3d_input_event"]

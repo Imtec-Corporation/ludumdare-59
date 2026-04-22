@@ -6,7 +6,7 @@ func _ready() -> void:
 	viewPort.gui_disable_input = false
 	viewPort.handle_input_locally = true
 
-func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_area_3d_input_event(_camera: Node, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	var localPos = to_local(event_position)
 	
 	if event is InputEventMouse:
