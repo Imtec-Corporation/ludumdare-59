@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://h5g750py30dt" path="res://src/controller/ship_controller.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cgp648wh2vf2u" path="res://mesh/station.glb" id="3_85g3d"]
 [ext_resource type="PackedScene" uid="uid://cbi4ild5atubp" path="res://mesh/chair.glb" id="4_choun"]
+[ext_resource type="Environment" uid="uid://xslyxqrplyf8" path="res://misc/environment.tres" id="4_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://0jc18c0bubqn" path="res://mesh/console.glb" id="4_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://b8sujkegp2lig" path="res://gfx/textures/navigation.png" id="5_jbj1t"]
 [ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/camera_controller.gd" id="5_tbgi4"]
@@ -17,42 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://btvp1ei6sfcxc" path="res://gfx/textures/2k_earth_specular_map.png" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://dtwm6j5vxh5yo" path="res://scenes/wide_screen.tscn" id="10_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://cioqseprd4a3q" path="res://gfx/textures/status.png" id="10_muem4"]
-
-[sub_resource type="Gradient" id="Gradient_tbgi4"]
-offsets = PackedFloat32Array(0.29166666, 0.9166667, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
-noise_type = 2
-frequency = 0.5
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tbgi4"]
-width = 2048
-height = 2048
-noise = SubResource("FastNoiseLite_tefeu")
-color_ramp = SubResource("Gradient_tbgi4")
-seamless = true
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tefeu"]
-panorama = SubResource("NoiseTexture2D_tbgi4")
-
-[sub_resource type="Sky" id="Sky_0wfyh"]
-sky_material = SubResource("PanoramaSkyMaterial_tefeu")
-
-[sub_resource type="Environment" id="Environment_0wfyh"]
-background_mode = 2
-sky = SubResource("Sky_0wfyh")
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 1.24
-reflected_light_source = 2
-glow_enabled = true
-glow_intensity = 1.0
-fog_mode = 1
-fog_light_color = Color(0.6999166, 0.25900003, 0.74, 1)
-fog_light_energy = 0.05
-fog_density = 1.0
-fog_depth_curve = 3.732134
+[ext_resource type="Script" uid="uid://beb3asquii4t1" path="res://src/controller/alert_light_controller.gd" id="16_0ld40"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_85g3d"]
 
@@ -130,6 +96,44 @@ emission = Color(1, 1, 1, 1)
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_0ld40"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_dp3eg"]
+resource_name = "flash"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ld40"]
+_data = {
+&"RESET": SubResource("Animation_0ld40"),
+&"flash": SubResource("Animation_dp3eg")
+}
+
 [sub_resource type="SphereMesh" id="SphereMesh_0wfyh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
@@ -144,6 +148,8 @@ normal_texture = ExtResource("7_o6xl0")
 refraction_enabled = true
 refraction_scale = 1.0
 refraction_texture = ExtResource("8_tipki")
+
+[sub_resource type="Compositor" id="Compositor_dp3eg"]
 
 [node name="Main" type="Node3D" unique_id=1522386376]
 
@@ -160,7 +166,7 @@ transform = Transform3D(0.1390867, -0.30637497, -0.9416949, 0.30637494, 0.917595
 
 [node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship/station" unique_id=1489622258]
 transform = Transform3D(1, 0, 0, 0, 0.98579156, -0.16797325, 0, 0.16797325, 0.98579156, -0.015185356, 1.4846954, -0.30680847)
-environment = SubResource("Environment_0wfyh")
+environment = ExtResource("4_dp3eg")
 script = ExtResource("5_tbgi4")
 
 [node name="UI" type="SubViewport" parent="OrbitPivot/Ship/station" unique_id=1448827747]
@@ -230,21 +236,25 @@ transform = Transform3D(-0.9975311, 0.021726888, 0.066781186, 0.042521447, 0.943
 [node name="AmbientLight" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=321290974]
 transform = Transform3D(1.0000001, 5.6610435e-08, -2.5192167e-08, -1.7451377e-08, 1.0000002, -1.4901161e-07, 7.744562e-09, 1.4901161e-07, 1.0000001, -0.4471283, 2.5145102, -0.55737114)
 light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+shadow_enabled = true
 omni_range = 1.8185198
 
 [node name="AmbientLight2" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=951361045]
 transform = Transform3D(1.0000001, 5.661044e-08, -5.4994487e-08, -1.9325043e-08, 1.0000002, -3.2782555e-07, 4.1792475e-08, 2.682209e-07, 1.0000001, -0.30104065, 0.9548578, -1.1437054)
 light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+shadow_enabled = true
 omni_range = 1.8185198
 
 [node name="AmbientLight3" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=923125516]
 transform = Transform3D(1.0000001, 5.661044e-08, -4.0093326e-08, -2.026946e-08, 1.0000002, -2.682209e-07, 2.5986575e-08, 2.3841858e-07, 1, -0.62493896, 2.5084686, 0.77591324)
 light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+shadow_enabled = true
 omni_range = 1.8185198
 
 [node name="AmbientLight4" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=1516381354]
 transform = Transform3D(1.0000001, 5.661044e-08, -5.4994487e-08, -1.9325043e-08, 1.0000002, -3.2782555e-07, 4.1792475e-08, 2.682209e-07, 1.0000001, -0.59921265, 1.2222614, 1.0018196)
 light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+shadow_enabled = true
 omni_range = 1.8185198
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=110150706]
@@ -269,6 +279,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dp3eg")
 
 [node name="keyboardLight" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=510795110]
 transform = Transform3D(1, 4.915986e-08, -9.969797e-08, -1.2558374e-08, 1.0000002, -3.2782555e-07, 7.4241306e-08, 2.682209e-07, 1.0000001, -0.060272217, 1.3070345, -0.6039219)
+shadow_enabled = true
 omni_range = 0.7552227
 
 [node name="topLamp" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights" unique_id=845883749]
@@ -285,11 +296,24 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0ld40")
 
 [node name="topLight" type="SpotLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=1441096695]
 transform = Transform3D(0.9844588, 0.16391456, 0.06303215, -0.095447004, 0.19811848, 0.97551996, 0.14741401, -0.96637547, 0.21068454, -0.16001892, 2.6309404, 0.34213066)
+shadow_enabled = true
 spot_range = 4.8551273
 
 [node name="topLight2" type="SpotLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=1938845793]
 transform = Transform3D(0.69608504, -0.24113968, -0.6762526, 0.70117116, 0.025826007, 0.7125254, -0.15435341, -0.9701469, 0.18705727, 1.2422638, 2.7625713, 0.50642204)
+shadow_enabled = true
 spot_range = 4.8551273
+
+[node name="alertLight" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=644096259]
+transform = Transform3D(1.0000001, 5.288515e-08, -5.4994487e-08, -1.66686e-08, 1.0000002, -3.2782555e-07, 4.0928217e-08, 2.682209e-07, 1.0000001, -0.5362396, 2.1189299, -0.07330704)
+visible = false
+light_color = Color(1, 0, 0, 1)
+shadow_enabled = true
+script = ExtResource("16_0ld40")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OrbitPivot/Ship/station/lights/alertLight" unique_id=99018072]
+libraries/ = SubResource("AnimationLibrary_0ld40")
+autoplay = &"flash"
 
 [node name="Earth" type="MeshInstance3D" parent="." unique_id=477472100]
 transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 0, 0, 0)
@@ -303,6 +327,10 @@ shadow_enabled = true
 shadow_bias = 0.725
 shadow_normal_bias = 0.542
 shadow_transmittance_bias = 1.05
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=409065179]
+environment = ExtResource("4_dp3eg")
+compositor = SubResource("Compositor_dp3eg")
 
 [connection signal="input_event" from="OrbitPivot/Ship/station/screens/main_screen/display/Area3D" to="OrbitPivot/Ship/station/screens/main_screen/display" method="_on_area_3d_input_event"]
 

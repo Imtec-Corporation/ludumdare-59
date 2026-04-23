@@ -1,0 +1,37 @@
+[gd_resource type="Environment" format=3 uid="uid://xslyxqrplyf8"]
+
+[sub_resource type="Gradient" id="Gradient_tbgi4"]
+offsets = PackedFloat32Array(0.29166666, 0.9166667, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
+noise_type = 2
+frequency = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tbgi4"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_tefeu")
+color_ramp = SubResource("Gradient_tbgi4")
+seamless = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tefeu"]
+panorama = SubResource("NoiseTexture2D_tbgi4")
+
+[sub_resource type="Sky" id="Sky_0wfyh"]
+sky_material = SubResource("PanoramaSkyMaterial_tefeu")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_0wfyh")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.24
+reflected_light_source = 2
+glow_enabled = true
+glow_intensity = 1.0
+fog_mode = 1
+fog_light_color = Color(0.6999166, 0.25900003, 0.74, 1)
+fog_light_energy = 0.05
+fog_density = 1.0
+fog_depth_curve = 3.732134
