@@ -15,15 +15,8 @@ func _init() -> void:
 
 func _ready() -> void:
 	writeData()
-
-	var msgTimer: Timer = Timer.new()
-	msgTimer.wait_time = 1.0
-	msgTimer.one_shot = true
-	msgTimer.autostart = true
-	msgTimer.connect("timeout", func(): MessageEvent.emit("System initialization complete"))
-	self.add_child(msgTimer)
-	msgTimer.start()
 	DataEvent.register(self._on_data_received)
+	call_deferred("_emit_startup_message")
 
 func _on_data_received(_int) -> void:
 	if self.station.synced:
@@ -45,4 +38,11 @@ func writeData() -> void:
 
 
 func _on_sync_timer_timeout() -> void:
-	pass # Replace with function body.
+	MessageEvent.emit("Satellite reference lost", true)
+	DataLossEvent.emit()
+	self.station.reset()
+
+
+func _emit_startup_message() -> void:
+	MessageEvent.emit("System initialization complete")
+	self.station.reset()

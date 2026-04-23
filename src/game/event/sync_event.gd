@@ -14,10 +14,11 @@ static func register(listener: Callable) -> void:
 static func unregister(listener: Callable) -> void:
     get_instance().wave_synced.disconnect(listener)
 
-static func emit(sync: bool) -> void:
+static func emit(sync: bool, verbose: bool = true) -> void:
     print_debug("Sync: ", sync)
     get_instance().wave_synced.emit(sync)
-    if sync:
-        MessageEvent.emit("Synchronization complete")
-    else:
-        MessageEvent.emit("Synchronization lost", true)
+    if verbose:
+        if sync:
+            MessageEvent.emit("Synchronization complete")
+        else:
+            MessageEvent.emit("Synchronization lost", true)

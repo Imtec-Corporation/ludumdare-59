@@ -15,4 +15,4 @@ static func register(listener: Callable) -> void:
 static func emit() -> void:
 	var data: int = DataProvider.new().provide()
 	get_instance().data_received.emit(data)
-	MessageEvent.emit("Stable data link established: " + str(data) + "MB")
+	MessageEvent.emit("Data link established: " + str(data) + "MB")

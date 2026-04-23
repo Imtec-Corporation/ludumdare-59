@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return
 
 	if event is InputEventMouseMotion:

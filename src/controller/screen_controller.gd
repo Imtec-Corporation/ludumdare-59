@@ -18,8 +18,6 @@ func _on_area_3d_input_event(_camera: Node, event: InputEvent, event_position: V
 		viewPos.x = (localPos.x / textSize.x + 0.5) * viewPort.size.x
 		viewPos.y = (0.5 - localPos.y / textSize.y) * viewPort.size.y
 		
-		print_debug("3D Spot: ", position, " -> 2D Viewport Sport: ", viewPos)
-		
 		eventCopy.position = viewPos
 		eventCopy.global_position = viewPos
 		viewPort.push_input(eventCopy)

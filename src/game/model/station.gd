@@ -17,9 +17,10 @@ func _init() -> void:
 	self.sigFreqProvider = SigFreqProvider.new()
 	self.sigAmpProvider = SigAmpProvider.new()
 	self.satFactory = SatFactory.new()
-	self.reset()
 	DataEvent.register(self._on_data_received)
 	AttackEvent.register(self._on_attack_event)
+	DataLossEvent.register(self._on_data_lost)
+	reset()	
 
 func reset() -> void:
 	self.synced = false
@@ -27,7 +28,8 @@ func reset() -> void:
 	self.shift = 0
 	self.satSignal = SatSignal.new(sigFreqProvider.provide(), sigAmpProvider.provide())
 	self.satellite = self.satFactory.create_satellite()
-	SyncEvent.emit(self.synced)
+	SyncEvent.emit(false, false)
+	MessageEvent.emit("Satellite reference set: " + self.satellite.name, false)
 
 func setFrequency(frequency: float) -> void:
 	self.satSignal.frequency = frequency
@@ -35,6 +37,15 @@ func setFrequency(frequency: float) -> void:
 
 func _on_data_received(d: int) -> void:
 	self.data += d
+
+func _on_data_lost(d: int) -> void:
+	if data == 0:
+		return
+	var loss: int = d
+	if loss > data:
+		loss = data
+	data -= loss
+	MessageEvent.emit("Data loss: " + str(loss) + "MB", true)
 
 func _on_attack_event(attack: bool) -> void:
 	if attack:
@@ -45,6 +56,7 @@ func _on_attack_event(attack: bool) -> void:
 		self.attackDetected = false
 	else:
 		MessageEvent.emit("[ERROR]: Friend fire triggered", true)
+		DataLossEvent.emit()
 
 func update():
 	var newSync: bool = abs(self.satSignal.frequency - self.satellite.satSignal.frequency) <= PRECISION and abs(self.satSignal.amplitude - self.satellite.satSignal.amplitude) < PRECISION
