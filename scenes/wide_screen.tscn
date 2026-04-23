@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dtwm6j5vxh5yo"]
+
+[ext_resource type="PackedScene" uid="uid://c22h2fwlgt021" path="res://mesh/wide_screen.glb" id="1_1iegn"]
+
+[sub_resource type="DPITexture" id="DPITexture_2kals"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iegn"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = SubResource("DPITexture_2kals")
+roughness = 0.37
+emission_enabled = true
+emission = Color(0.053093106, 0.21719706, 0.091384016, 1)
+emission_energy_multiplier = 0.44
+backlight_enabled = true
+backlight = Color(0.37629998, 0.71, 0.38186166, 1)
+
+[node name="wide_screen" unique_id=270651912 instance=ExtResource("1_1iegn")]
+
+[node name="Frame" parent="." index="0" unique_id=1026716342]
+gi_mode = 2
+
+[node name="Screen" parent="." index="1" unique_id=301949526]
+gi_mode = 2
+surface_material_override/0 = SubResource("StandardMaterial3D_1iegn")

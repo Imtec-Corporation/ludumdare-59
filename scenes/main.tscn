@@ -7,10 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://cgp648wh2vf2u" path="res://mesh/station.glb" id="3_85g3d"]
 [ext_resource type="PackedScene" uid="uid://cbi4ild5atubp" path="res://mesh/chair.glb" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://0jc18c0bubqn" path="res://mesh/console.glb" id="4_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://b8sujkegp2lig" path="res://gfx/textures/navigation.png" id="5_jbj1t"]
 [ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/camera_controller.gd" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dk56s6rv3odrv" path="res://gfx/textures/2k_earth_daymap.jpg" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://c48kolyoeqy8g" path="res://mesh/square_screen.glb" id="6_trceg"]
+[ext_resource type="Texture2D" uid="uid://c638mvpb3qhda" path="res://gfx/textures/lifesupport.png" id="7_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://dgiy4qihtwkfb" path="res://gfx/textures/2k_earth_normal_map.png" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://c22h2fwlgt021" path="res://mesh/wide_screen.glb" id="8_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://btvp1ei6sfcxc" path="res://gfx/textures/2k_earth_specular_map.png" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://dtwm6j5vxh5yo" path="res://scenes/wide_screen.tscn" id="10_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://cioqseprd4a3q" path="res://gfx/textures/status.png" id="10_muem4"]
 
 [sub_resource type="Gradient" id="Gradient_tbgi4"]
 offsets = PackedFloat32Array(0.29166666, 0.9166667, 1)
@@ -48,12 +54,6 @@ fog_light_energy = 0.05
 fog_density = 1.0
 fog_depth_curve = 3.732134
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_o5qli"]
-viewport_path = NodePath("OrbitPivot/Ship/station/UI")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
-size = Vector3(11.010452, 7.547058, 1)
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_85g3d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85g3d"]
@@ -62,6 +62,73 @@ albedo_color = Color(1, 1, 1, 0.043137256)
 metallic = 1.0
 metallic_specular = 1.0
 roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trceg"]
+albedo_texture = ExtResource("7_a8y0u")
+roughness = 0.35
+emission_enabled = true
+emission = Color(0.5368211, 0.7237804, 0.6454495, 1)
+emission_energy_multiplier = 0.59
+emission_texture = ExtResource("7_a8y0u")
+backlight_enabled = true
+backlight = Color(0.5070511, 0.6888017, 0.6640173, 1)
+backlight_texture = ExtResource("7_a8y0u")
+refraction_scale = 0.47
+uv1_scale = Vector3(4.035, 3.825, 1)
+uv1_offset = Vector3(0.475, 1.015, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbj1t"]
+albedo_texture = ExtResource("10_muem4")
+roughness = 0.35
+emission_enabled = true
+emission = Color(0.5368211, 0.7237804, 0.6454495, 1)
+emission_energy_multiplier = 0.59
+emission_texture = ExtResource("10_muem4")
+backlight_enabled = true
+backlight = Color(0.5070511, 0.6888017, 0.6640173, 1)
+backlight_texture = ExtResource("10_muem4")
+refraction_scale = 0.47
+uv1_scale = Vector3(4.085, 3.475, 1)
+uv1_offset = Vector3(0.455, 1.005, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o5qli"]
+viewport_path = NodePath("OrbitPivot/Ship/station/UI")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
+size = Vector3(11.010452, 7.547058, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
+albedo_texture = ExtResource("5_jbj1t")
+roughness = 0.04
+emission_enabled = true
+emission_energy_multiplier = 2.26
+emission_texture = ExtResource("5_jbj1t")
+backlight_enabled = true
+backlight = Color(0.5649617, 0.5649616, 0.5649616, 1)
+backlight_texture = ExtResource("5_jbj1t")
+uv1_scale = Vector3(0.57, 1.34, 1)
+uv1_offset = Vector3(-0.515, -0.385, 0)
+uv1_triplanar = true
+uv2_scale = Vector3(0.845, 0.845, 0.845)
+uv2_offset = Vector3(0.615, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_muem4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp3eg"]
+albedo_color = Color(0.31620002, 0.102000006, 0.34, 1)
+roughness = 0.33
+emission_enabled = true
+emission = Color(0.31764707, 0.101960786, 0.34117648, 1)
+emission_energy_multiplier = 1.54
+
+[sub_resource type="BoxMesh" id="BoxMesh_muem4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ld40"]
+roughness = 0.25
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0wfyh"]
 
@@ -89,33 +156,12 @@ transform = Transform3D(1, 0, 0, 0, 0.3093821, 0.9509378, 0, -0.9509378, 0.30938
 script = ExtResource("1_sugp2")
 
 [node name="station" parent="OrbitPivot/Ship" unique_id=985176379 instance=ExtResource("3_85g3d")]
-
-[node name="console" parent="OrbitPivot/Ship/station" unique_id=992104500 instance=ExtResource("4_ya4ey")]
-transform = Transform3D(1, 0, 0, 0, 0.96898985, -0.24710038, 0, 0.24710038, 0.96898985, 0, 0.62361145, -0.9506073)
-
-[node name="chair" parent="OrbitPivot/Ship/station" unique_id=12806026 instance=ExtResource("4_choun")]
-transform = Transform3D(-0.99753106, 0.021726875, 0.066781186, 0.042521443, 0.94367254, 0.32813728, -0.055890173, 0.33016664, -0.9422666, 0, 0, 0)
-
-[node name="AmbientLight" type="OmniLight3D" parent="OrbitPivot/Ship/station" unique_id=321290974]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4208755, -0.13552856)
-omni_range = 2.014159
+transform = Transform3D(0.1390867, -0.30637497, -0.9416949, 0.30637494, 0.9175956, -0.25328338, 0.9416949, -0.25328338, 0.22149098, 0, 0, 0)
 
 [node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship/station" unique_id=1489622258]
 transform = Transform3D(1, 0, 0, 0, 0.98579156, -0.16797325, 0, 0.16797325, 0.98579156, -0.015185356, 1.4846954, -0.30680847)
 environment = SubResource("Environment_0wfyh")
 script = ExtResource("5_tbgi4")
-
-[node name="Screen" type="Sprite3D" parent="OrbitPivot/Ship/station" unique_id=21806545 node_paths=PackedStringArray("viewPort")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, -1.8626451e-09, 0, 1.8626451e-09, 0.1, 0, 1.6115417, -0.9700012)
-texture = SubResource("ViewportTexture_o5qli")
-script = ExtResource("1_0wfyh")
-viewPort = NodePath("../UI")
-
-[node name="Area3D" type="Area3D" parent="OrbitPivot/Ship/station/Screen" unique_id=727302336]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OrbitPivot/Ship/station/Screen/Area3D" unique_id=278560926]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013008118, -0.009063721, 0)
-shape = SubResource("BoxShape3D_o5qli")
 
 [node name="UI" type="SubViewport" parent="OrbitPivot/Ship/station" unique_id=1448827747]
 transparent_bg = true
@@ -128,6 +174,122 @@ render_target_update_mode = 4
 transform = Transform3D(-6.119594e-08, 0.121, 0, -1.4, -5.289078e-09, 0, 0, 0, 1.4, -2.5973575, 1.5081482, -0.005706787)
 mesh = SubResource("CylinderMesh_85g3d")
 surface_material_override/0 = SubResource("StandardMaterial3D_85g3d")
+
+[node name="screens" type="Node3D" parent="OrbitPivot/Ship/station" unique_id=1217649082]
+
+[node name="square_screen" parent="OrbitPivot/Ship/station/screens" unique_id=1941079586 instance=ExtResource("6_trceg")]
+transform = Transform3D(0.6197061, -0.0467616, 0.7834416, 0.26057905, 0.95385754, -0.14918514, -0.7403159, 0.2965994, 0.6032942, -0.87979126, 1.0597086, -0.5936737)
+
+[node name="Display" parent="OrbitPivot/Ship/station/screens/square_screen/Frame" parent_id_path=PackedInt32Array(1941079586, 1570187765) index="0" unique_id=1960330807]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.21826658, 0.19341917)
+surface_material_override/0 = SubResource("StandardMaterial3D_trceg")
+
+[node name="square_screen2" parent="OrbitPivot/Ship/station/screens" unique_id=1889095091 instance=ExtResource("6_trceg")]
+transform = Transform3D(0.65534556, -0.09082967, -0.7498521, -0.10266255, 0.9728239, -0.20756118, 0.7483245, 0.21300733, 0.6282081, 0.79592896, 1.0764704, -0.6194935)
+
+[node name="Display" parent="OrbitPivot/Ship/station/screens/square_screen2/Frame" parent_id_path=PackedInt32Array(1889095091, 1570187765) index="0" unique_id=1960330807]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.21826658, 0.19341917)
+surface_material_override/0 = SubResource("StandardMaterial3D_jbj1t")
+
+[node name="main_screen" parent="OrbitPivot/Ship/station/screens" unique_id=763197609 instance=ExtResource("10_jkv2x")]
+transform = Transform3D(0.6600001, -4.917137e-09, -9.831027e-09, -1.5610979e-10, 0.9618325, -0.16692051, 4.7202233e-09, 0.27364028, 0.5867177, -1.5258789e-05, 1.0705338, -1.1975098)
+
+[node name="display" type="Sprite3D" parent="OrbitPivot/Ship/station/screens/main_screen" unique_id=21806545 node_paths=PackedStringArray("viewPort")]
+transform = Transform3D(0.15151517, 0, 0, 0, 0.10000003, -1.8626451e-09, 0, 7.450581e-09, 0.16393442, 0, 0.6749306, 0.13116455)
+texture = SubResource("ViewportTexture_o5qli")
+script = ExtResource("1_0wfyh")
+viewPort = NodePath("../../../UI")
+
+[node name="Area3D" type="Area3D" parent="OrbitPivot/Ship/station/screens/main_screen/display" unique_id=727302336]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OrbitPivot/Ship/station/screens/main_screen/display/Area3D" unique_id=278560926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013008118, -0.009063721, 0)
+shape = SubResource("BoxShape3D_o5qli")
+
+[node name="nav_screen" parent="OrbitPivot/Ship/station/screens" unique_id=270651912 instance=ExtResource("8_eb6dy")]
+transform = Transform3D(-1.0000004, -1.0444788e-08, -3.491066e-08, 1.3323289e-09, 1.0000001, -7.450581e-09, 1.5984331e-07, 1.4901161e-07, -0.3000001, -0.19839478, 1.2415829, 1.0815277)
+
+[node name="Screen" parent="OrbitPivot/Ship/station/screens/nav_screen" index="1" unique_id=301949526]
+surface_material_override/0 = SubResource("StandardMaterial3D_muem4")
+
+[node name="furniture" type="Node3D" parent="OrbitPivot/Ship/station" unique_id=75220403]
+
+[node name="console" parent="OrbitPivot/Ship/station/furniture" unique_id=992104500 instance=ExtResource("4_ya4ey")]
+transform = Transform3D(1.0000001, -5.14091e-09, 5.180416e-10, -4.5262567e-09, 0.9689899, -0.24710035, 3.5394496e-09, 0.24710044, 0.9689899, 0, 0.62361145, -0.9506073)
+
+[node name="Cube" parent="OrbitPivot/Ship/station/furniture/console" index="0" unique_id=1858711008]
+gi_mode = 2
+
+[node name="chair" parent="OrbitPivot/Ship/station/furniture" unique_id=12806026 instance=ExtResource("4_choun")]
+transform = Transform3D(-0.9975311, 0.021726888, 0.066781186, 0.042521447, 0.9436726, 0.32813734, -0.055890173, 0.33016667, -0.9422666, 0, 0, 0)
+
+[node name="lights" type="Node3D" parent="OrbitPivot/Ship/station" unique_id=1796946289]
+
+[node name="neon" type="Node3D" parent="OrbitPivot/Ship/station/lights" unique_id=116268978]
+
+[node name="AmbientLight" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=321290974]
+transform = Transform3D(1.0000001, 5.6610435e-08, -2.5192167e-08, -1.7451377e-08, 1.0000002, -1.4901161e-07, 7.744562e-09, 1.4901161e-07, 1.0000001, -0.4471283, 2.5145102, -0.55737114)
+light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+omni_range = 1.8185198
+
+[node name="AmbientLight2" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=951361045]
+transform = Transform3D(1.0000001, 5.661044e-08, -5.4994487e-08, -1.9325043e-08, 1.0000002, -3.2782555e-07, 4.1792475e-08, 2.682209e-07, 1.0000001, -0.30104065, 0.9548578, -1.1437054)
+light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+omni_range = 1.8185198
+
+[node name="AmbientLight3" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=923125516]
+transform = Transform3D(1.0000001, 5.661044e-08, -4.0093326e-08, -2.026946e-08, 1.0000002, -2.682209e-07, 2.5986575e-08, 2.3841858e-07, 1, -0.62493896, 2.5084686, 0.77591324)
+light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+omni_range = 1.8185198
+
+[node name="AmbientLight4" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=1516381354]
+transform = Transform3D(1.0000001, 5.661044e-08, -5.4994487e-08, -1.9325043e-08, 1.0000002, -3.2782555e-07, 4.1792475e-08, 2.682209e-07, 1.0000001, -0.59921265, 1.2222614, 1.0018196)
+light_color = Color(0.31764707, 0.101960786, 0.34117648, 1)
+omni_range = 1.8185198
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=110150706]
+transform = Transform3D(-0.0011484866, -0.5648883, 0.0009533996, 0.07159114, -0.006120595, 0.022339517, -0.022324756, 0.009432875, 0.07158937, 0.03930664, 2.6431656, -0.80682945)
+mesh = SubResource("CylinderMesh_muem4")
+surface_material_override/0 = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=13434509]
+transform = Transform3D(-0.0011484862, -0.5648884, 0.0009533996, 0.07159114, -0.0061206007, 0.022339517, -0.022324756, 0.00943285, 0.07158937, 0.12599182, 0.892746, -1.2713146)
+mesh = SubResource("CylinderMesh_muem4")
+surface_material_override/0 = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=1298870679]
+transform = Transform3D(-0.0011484864, -0.5648884, 0.0009533996, 0.07159114, -0.006120599, 0.022339517, -0.022324756, 0.00943286, 0.07158937, -0.18977356, 2.5403938, 0.9414921)
+mesh = SubResource("CylinderMesh_muem4")
+surface_material_override/0 = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights/neon" unique_id=757186515]
+transform = Transform3D(-0.0011484863, -0.5648884, 0.0009533996, 0.07159114, -0.0061206, 0.022339517, -0.022324756, 0.009432851, 0.07158937, -0.1665039, 0.925066, 1.2927227)
+mesh = SubResource("CylinderMesh_muem4")
+surface_material_override/0 = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="keyboardLight" type="OmniLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=510795110]
+transform = Transform3D(1, 4.915986e-08, -9.969797e-08, -1.2558374e-08, 1.0000002, -3.2782555e-07, 7.4241306e-08, 2.682209e-07, 1.0000001, -0.060272217, 1.3070345, -0.6039219)
+omni_range = 0.7552227
+
+[node name="topLamp" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights" unique_id=845883749]
+transform = Transform3D(0.9999552, -0.000581979, 0.0032527056, 0.009153395, 0.06484786, -0.06777206, -0.0026382648, 0.0044069365, 0.9976955, -0.14041138, 2.7184067, 0.16683388)
+gi_mode = 2
+mesh = SubResource("BoxMesh_muem4")
+surface_material_override/0 = SubResource("StandardMaterial3D_0ld40")
+
+[node name="topLamp2" type="MeshInstance3D" parent="OrbitPivot/Ship/station/lights" unique_id=521667194]
+transform = Transform3D(0.16499253, -0.00058197713, 0.0032526758, 0.0015103053, 0.06484786, -0.0677723, -0.00043531845, 0.004406944, 0.9976955, 1.0944519, 2.7993498, 0.16457939)
+gi_mode = 2
+mesh = SubResource("BoxMesh_muem4")
+surface_material_override/0 = SubResource("StandardMaterial3D_0ld40")
+
+[node name="topLight" type="SpotLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=1441096695]
+transform = Transform3D(0.9844588, 0.16391456, 0.06303215, -0.095447004, 0.19811848, 0.97551996, 0.14741401, -0.96637547, 0.21068454, -0.16001892, 2.6309404, 0.34213066)
+spot_range = 4.8551273
+
+[node name="topLight2" type="SpotLight3D" parent="OrbitPivot/Ship/station/lights" unique_id=1938845793]
+transform = Transform3D(0.69608504, -0.24113968, -0.6762526, 0.70117116, 0.025826007, 0.7125254, -0.15435341, -0.9701469, 0.18705727, 1.2422638, 2.7625713, 0.50642204)
+spot_range = 4.8551273
 
 [node name="Earth" type="MeshInstance3D" parent="." unique_id=477472100]
 transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 0, 0, 0)
@@ -142,4 +304,9 @@ shadow_bias = 0.725
 shadow_normal_bias = 0.542
 shadow_transmittance_bias = 1.05
 
-[connection signal="input_event" from="OrbitPivot/Ship/station/Screen/Area3D" to="OrbitPivot/Ship/station/Screen" method="_on_area_3d_input_event"]
+[connection signal="input_event" from="OrbitPivot/Ship/station/screens/main_screen/display/Area3D" to="OrbitPivot/Ship/station/screens/main_screen/display" method="_on_area_3d_input_event"]
+
+[editable path="OrbitPivot/Ship/station/screens/square_screen"]
+[editable path="OrbitPivot/Ship/station/screens/square_screen2"]
+[editable path="OrbitPivot/Ship/station/screens/nav_screen"]
+[editable path="OrbitPivot/Ship/station/furniture/console"]
