@@ -333,6 +333,8 @@ environment = ExtResource("4_dp3eg")
 compositor = SubResource("Compositor_dp3eg")
 
 [connection signal="input_event" from="OrbitPivot/Ship/station/screens/main_screen/display/Area3D" to="OrbitPivot/Ship/station/screens/main_screen/display" method="_on_area_3d_input_event"]
+[connection signal="mouse_entered" from="OrbitPivot/Ship/station/screens/main_screen/display/Area3D" to="OrbitPivot/Ship/station/screens/main_screen/display" method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="OrbitPivot/Ship/station/screens/main_screen/display/Area3D" to="OrbitPivot/Ship/station/screens/main_screen/display" method="_on_area_3d_mouse_exited"]
 
 [editable path="OrbitPivot/Ship/station/screens/square_screen"]
 [editable path="OrbitPivot/Ship/station/screens/square_screen2"]

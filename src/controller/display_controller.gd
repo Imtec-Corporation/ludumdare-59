@@ -4,9 +4,9 @@ extends Control
 @export var line_width: float = 1.0
 @export var speed: float = 1.0
 ## Station trace (the “scope” look).
-@export var station_line_color: Color = Color(0.15, 1.0, 0.2, 1.0)
+@export var station_line_color: Color = Color(0.15, 1.0, 0.0, 1.0)
 ## Satellite trace (plain / telemetry look).
-@export var satellite_line_color: Color = Color(0.55, 0.85, 1.0, 0.75)
+@export var satellite_line_color: Color = Color(0.12, 0.57, 0.562, 1.0)
 @export var satellite_line_width: float = 0.9
 ## Vertical separation between the two traces (as a fraction of control height).
 @export var trace_split: float = 0.22
@@ -82,6 +82,13 @@ func update_signals(station_signal: SatSignal, satellite_signal: SatSignal) -> v
 	station_amplitude = station_signal.amplitude
 	satellite_frequency_hz = satellite_signal.frequency
 	satellite_amplitude = satellite_signal.amplitude
+	
+	var deltaFreq: float = abs(station_frequency_hz - satellite_frequency_hz)
+	var deltaAmp: float = abs(station_amplitude - satellite_amplitude)
+	
+	var delta: float = sqrt(pow(deltaFreq, 2) + pow(deltaAmp, 2))
+	station_line_color.r = delta
+	station_line_color.g = 1 / delta
 
 
 func _build_trace_points(

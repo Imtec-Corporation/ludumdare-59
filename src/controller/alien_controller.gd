@@ -19,6 +19,8 @@ func _ready() -> void:
 	self.add_child(self.attackTimer)
 
 	AttackEvent.register(self._on_attack_event)
+	GameOverEvent.register(self._on_game_over)
+	
 	self.start_timer()
 
 func start_timer() -> void:
@@ -31,8 +33,14 @@ func on_prepare_timer_timeout() -> void:
 
 func on_attack_timer_timeout() -> void:
 	MessageEvent.emit("Alien attack completed, all links lost!", true)
+	GameOverEvent.emit()
 
 func _on_attack_event(attack: bool) -> void:
 	if not attack and not attackTimer.is_stopped():
 		attackTimer.stop()
 		start_timer()
+
+func _on_game_over() -> void:
+	self.prepareTimer.stop()
+	self.attackTimer.stop()
+	AttackEvent.unregister(self._on_attack_event)

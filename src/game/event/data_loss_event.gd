@@ -12,6 +12,9 @@ static func get_instance() -> DataLossEvent:
 static func register(listener: Callable) -> void:
 	get_instance().data_loss_event.connect(listener)
 
+static func unregister(listener: Callable) -> void:
+	get_instance().data_loss_event.disconnect(listener)
+
 static func emit() -> void:
 	var loss: int = randi_range(10, 500)
 	get_instance().data_loss_event.emit(loss)

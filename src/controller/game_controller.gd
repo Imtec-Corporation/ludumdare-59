@@ -10,12 +10,15 @@ var station: Station
 @onready var syncTimer: Timer = $SyncTimer
 @onready var syncProgress: ProgressBar = $UI/SyncProgress
 
+var _is_reloading: bool = false
+
 func _init() -> void:
 	self.station = Station.new()
 
 func _ready() -> void:
 	writeData()
 	DataEvent.register(self._on_data_received)
+	GameOverEvent.register(self._on_game_over)
 	call_deferred("_emit_startup_message")
 
 func _on_data_received(_int) -> void:
@@ -46,3 +49,33 @@ func _on_sync_timer_timeout() -> void:
 func _emit_startup_message() -> void:
 	MessageEvent.emit("System initialization complete")
 	self.station.reset()
+
+func _on_game_over() -> void:
+	if _is_reloading:
+		return
+	_is_reloading = true
+
+	DataEvent.unregister(self._on_data_received)
+	syncTimer.stop()
+	$UI.visible = false
+	$LoseLabel.visible = true
+
+	var resetTimer: Timer = Timer.new()
+	resetTimer.wait_time = 5.0
+	resetTimer.one_shot = true
+	resetTimer.name = "GameOverResetTimer"
+	resetTimer.timeout.connect(self._on_reset_timer_timeout)
+	add_child(resetTimer)
+	resetTimer.start()
+
+func _on_reset_timer_timeout() -> void:
+	_stop_local_timers()
+	get_tree().reload_current_scene()
+
+func _stop_local_timers() -> void:
+	for child in get_children():
+		if child is Timer:
+			var timer := child as Timer
+			timer.stop()
+			if timer != syncTimer:
+				timer.queue_free()

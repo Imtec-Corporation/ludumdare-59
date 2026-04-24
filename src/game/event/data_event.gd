@@ -12,6 +12,9 @@ static func get_instance() -> DataEvent:
 static func register(listener: Callable) -> void:
 	get_instance().data_received.connect(listener)
 
+static func unregister(listener: Callable) -> void:
+	get_instance().data_received.disconnect(listener)
+
 static func emit() -> void:
 	var data: int = DataProvider.new().provide()
 	get_instance().data_received.emit(data)

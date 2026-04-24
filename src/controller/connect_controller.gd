@@ -15,11 +15,11 @@ func _ready() -> void:
 func on_connect_pressed() -> void:
 	if attacked:
 		return
-		
+
 	if synced:
 		DataEvent.emit()
 	else:
-		MessageEvent.emit("Data link not available", true)
+		MessageEvent.emit("[ERROR]: Data link not available", true)
 		
 func _on_sync(s: bool) -> void:
 	synced = s

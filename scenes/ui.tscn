@@ -265,6 +265,24 @@ autostart = true
 [node name="Alien" type="Node" parent="." unique_id=922964977]
 script = ExtResource("10_7dvkv")
 
+[node name="LoseLabel" type="Label" parent="." unique_id=288486490]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Yugen protocol general failure
+Satellite links lost
+Alien infiltration confirmed
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="value_changed" from="UI/ControlArea/Controls/FreqSlider" to="UI/ControlArea/Controls/FreqSlider" method="_on_value_changed"]
 [connection signal="value_changed" from="UI/ControlArea/Controls/AmpSlider" to="UI/ControlArea/Controls/AmpSlider" method="_on_value_changed"]
 [connection signal="timeout" from="SyncTimer" to="." method="_on_sync_timer_timeout"]
