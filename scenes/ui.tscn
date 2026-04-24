@@ -58,7 +58,15 @@ bg_color = Color(0.61, 0.1586, 0.1586, 1)
 bg_color = Color(0.41, 0.081999995, 0.081999995, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
-bg_color = Color(0.66, 0.2112, 0.2112, 1)
+bg_color = Color(0.8, 0.43199998, 0.43199998, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [node name="Root" type="Control" unique_id=1541931026]
 material = SubResource("CanvasItemMaterial_ktti3")
@@ -209,49 +217,49 @@ layout_mode = 2
 
 [node name="Controls" type="VBoxContainer" parent="UI/ControlArea" unique_id=2031840487]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 
 [node name="FreqLabel" type="Label" parent="UI/ControlArea/Controls" unique_id=1874983205]
 layout_mode = 2
 text = "Signal Frequency"
 
 [node name="FreqSlider" type="HSlider" parent="UI/ControlArea/Controls" unique_id=2074031938]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_vertical = 2
 max_value = 10.0
 step = 0.1
 script = ExtResource("6_vsj0x")
-
-[node name="HSeparator" type="HSeparator" parent="UI/ControlArea/Controls" unique_id=777653222]
-layout_mode = 2
 
 [node name="Label" type="Label" parent="UI/ControlArea/Controls" unique_id=355112199]
 layout_mode = 2
 text = "Signal Amplitude"
 
 [node name="AmpSlider" type="HSlider" parent="UI/ControlArea/Controls" unique_id=1346252059]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_vertical = 2
 max_value = 10.0
 step = 0.1
 script = ExtResource("7_qsv74")
-
-[node name="HSeparator2" type="HSeparator" parent="UI/ControlArea/Controls" unique_id=1052219576]
-layout_mode = 2
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="UI/ControlArea/Controls" unique_id=190029058]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ConnectButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=2071063007]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "CONNECT"
 script = ExtResource("8_h1mc3")
 
 [node name="PurgeButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=1952172317]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_horizontal = 10
+size_flags_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o6xl0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tipki")

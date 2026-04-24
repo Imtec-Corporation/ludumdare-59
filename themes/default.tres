@@ -7,6 +7,14 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1vgm"]
 bg_color = Color(0.47242662, 0.86, 0.4128, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgbfu"]
 bg_color = Color(0.2187866, 0.61, 0.1586, 1)
@@ -17,6 +25,15 @@ bg_color = Color(0.12573329, 0.41, 0.081999995, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_l6fbw"]
 color = Color(0.12418323, 0.46774423, 0.11865174, 1)
 thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsmww"]
+bg_color = Color(0, 0.13, 0.0021666645, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.2051174, 0.20511746, 0.20511726, 1)
+border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hd2i"]
 bg_color = Color(0.11119685, 0.11119685, 0.11119678, 1)
@@ -65,6 +82,7 @@ HSeparator/styles/separator = SubResource("StyleBoxLine_l6fbw")
 HSlider/icons/grabber = ExtResource("1_gnsgt")
 HSlider/icons/grabber_disabled = ExtResource("2_l6fbw")
 HSlider/icons/grabber_highlight = ExtResource("3_5hd2i")
+HSlider/styles/slider = SubResource("StyleBoxFlat_dsmww")
 Label/colors/font_color = Color(0.44708145, 0.7471354, 0.31803852, 1)
 ProgressBar/styles/background = SubResource("StyleBoxFlat_5hd2i")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_d3e7e")
