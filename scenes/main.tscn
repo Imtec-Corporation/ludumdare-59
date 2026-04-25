@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://bp23sgjmxgdsd"]
 
-[ext_resource type="Script" uid="uid://dcexjxy2ntrob" path="res://src/controller/screen_controller.gd" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://cxys7aq0kll53" path="res://src/controller/main_controller.gd" id="1_gqmmt"]
-[ext_resource type="Script" uid="uid://fwqeua2lbfgk" path="res://src/controller/orbit_controller.gd" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://dcexjxy2ntrob" path="res://src/controller/object/screen_controller.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://cxys7aq0kll53" path="res://src/controller/game/main_controller.gd" id="1_gqmmt"]
+[ext_resource type="Script" uid="uid://fwqeua2lbfgk" path="res://src/controller/object/orbit_controller.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dsj22t33qtkif" path="res://scenes/ui.tscn" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://h5g750py30dt" path="res://src/controller/ship_controller.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://h5g750py30dt" path="res://src/controller/object/ship_controller.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cgp648wh2vf2u" path="res://mesh/station.glb" id="3_85g3d"]
 [ext_resource type="PackedScene" uid="uid://cbi4ild5atubp" path="res://mesh/chair.glb" id="4_choun"]
 [ext_resource type="Environment" uid="uid://xslyxqrplyf8" path="res://misc/environment.tres" id="4_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://0jc18c0bubqn" path="res://mesh/console.glb" id="4_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://b8sujkegp2lig" path="res://gfx/textures/navigation.png" id="5_jbj1t"]
-[ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/camera_controller.gd" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://bwusvbevwc1df" path="res://src/controller/object/camera_controller.gd" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dk56s6rv3odrv" path="res://gfx/textures/2k_earth_daymap.jpg" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://c48kolyoeqy8g" path="res://mesh/square_screen.glb" id="6_trceg"]
 [ext_resource type="Texture2D" uid="uid://c638mvpb3qhda" path="res://gfx/textures/lifesupport.png" id="7_a8y0u"]
@@ -19,9 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://btvp1ei6sfcxc" path="res://gfx/textures/2k_earth_specular_map.png" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://dtwm6j5vxh5yo" path="res://scenes/wide_screen.tscn" id="10_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://cioqseprd4a3q" path="res://gfx/textures/status.png" id="10_muem4"]
-[ext_resource type="Script" uid="uid://beb3asquii4t1" path="res://src/controller/alert_light_controller.gd" id="16_0ld40"]
-[ext_resource type="Script" uid="uid://cf0ahhyffbk6e" path="res://src/controller/start_button_controller.gd" id="21_jscy8"]
+[ext_resource type="Script" uid="uid://beb3asquii4t1" path="res://src/controller/object/alert_light_controller.gd" id="16_0ld40"]
+[ext_resource type="AudioStream" uid="uid://dxsuk08gisxrt" path="res://sound/sfx/noise.mp3" id="18_og1vs"]
+[ext_resource type="Script" uid="uid://cf0ahhyffbk6e" path="res://src/controller/component/start_button_controller.gd" id="21_jscy8"]
 [ext_resource type="AudioStream" uid="uid://cb4hi3uuid4l6" path="res://sound/bgm/soe.mp3" id="21_yc10j"]
+[ext_resource type="AudioStream" uid="uid://o6tyllbm3u6j" path="res://sound/sfx/ClickBig.wav" id="22_y6deb"]
+[ext_resource type="AudioStream" uid="uid://die6u3gjbh02y" path="res://sound/sfx/Hover.wav" id="23_og1vs"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_85g3d"]
 
@@ -200,7 +203,7 @@ _data = {
 script = ExtResource("1_gqmmt")
 titleCam = NodePath("OrbitPivot/Titlecam")
 stationCam = NodePath("OrbitPivot/Ship/station/Main Cam")
-station = NodePath("OrbitPivot/Ship")
+station = NodePath("OrbitPivot/Ship/station")
 
 [node name="OrbitPivot" type="Node3D" parent="." unique_id=1785156259]
 script = ExtResource("1_jyhfs")
@@ -366,12 +369,19 @@ script = ExtResource("16_0ld40")
 libraries/ = SubResource("AnimationLibrary_0ld40")
 autoplay = &"flash"
 
+[node name="NoisePlayer" type="AudioStreamPlayer3D" parent="OrbitPivot/Ship" unique_id=593567122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1584244, -1.1987)
+stream = ExtResource("18_og1vs")
+volume_db = 60.0
+autoplay = true
+max_distance = 4.0
+
 [node name="Titlecam" type="Camera3D" parent="OrbitPivot" unique_id=1868272589]
 transform = Transform3D(0.13455871, 0.9907303, -0.018639332, -0.9882798, 0.13554688, 0.070214465, 0.0720901, 0.008972907, 0.9973578, -5.5075417, 216.49303, 23.07695)
 current = true
 
 [node name="Earth" type="MeshInstance3D" parent="." unique_id=477472100]
-transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 0, 0, 0)
+transform = Transform3D(-1.3113417e-05, -300, 0, 300, -1.3113417e-05, 0, 0, 0, 300, 0, 0, 0)
 gi_mode = 2
 mesh = SubResource("SphereMesh_0wfyh")
 surface_material_override/0 = SubResource("StandardMaterial3D_0wfyh")
@@ -412,7 +422,7 @@ horizontal_alignment = 1
 libraries/ = SubResource("AnimationLibrary_jscy8")
 autoplay = &"blink"
 
-[node name="Button" type="Button" parent="TitleUI" unique_id=938107818]
+[node name="StartButton" type="Button" parent="TitleUI" unique_id=938107818]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -428,6 +438,10 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "Start"
 script = ExtResource("21_jscy8")
+clickSound = ExtResource("22_y6deb")
+hoverSound = ExtResource("23_og1vs")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="TitleUI/StartButton" unique_id=2053194426]
 
 [node name="CopyLabel" type="Label" parent="TitleUI" unique_id=1183799919]
 layout_mode = 1

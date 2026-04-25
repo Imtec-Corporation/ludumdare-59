@@ -1,17 +1,29 @@
 [gd_scene format=3 uid="uid://dsj22t33qtkif"]
 
-[ext_resource type="Script" uid="uid://ccw470w11fg60" path="res://src/controller/game_controller.gd" id="1_ktti3"]
+[ext_resource type="Script" uid="uid://ccw470w11fg60" path="res://src/controller/game/game_controller.gd" id="1_ktti3"]
 [ext_resource type="Theme" uid="uid://d2eue2i6cy0tx" path="res://themes/default.tres" id="2_cgfq5"]
-[ext_resource type="Script" uid="uid://bgdfix2tchnxx" path="res://src/controller/sync_led_controller.gd" id="3_7dvkv"]
-[ext_resource type="Script" uid="uid://um715i1ogsky" path="res://src/controller/display_controller.gd" id="4_vdcm2"]
-[ext_resource type="Script" uid="uid://o2sutexqhrmb" path="res://src/controller/message_controller.gd" id="5_6rmj2"]
-[ext_resource type="Script" uid="uid://c2kfukvlyw4xr" path="res://src/controller/alert_box_controller.gd" id="5_vdcm2"]
-[ext_resource type="Script" uid="uid://clwnibpbfrknq" path="res://src/controller/freq_slider_controller.gd" id="6_vsj0x"]
+[ext_resource type="AudioStream" uid="uid://8h2giobieok5" path="res://sound/sfx/incoming_attack.mp3" id="2_cof4p"]
+[ext_resource type="Script" uid="uid://bgdfix2tchnxx" path="res://src/controller/object/sync_led_controller.gd" id="3_7dvkv"]
+[ext_resource type="AudioStream" uid="uid://bln2tommj5627" path="res://sound/sfx/transmision_success.mp3" id="3_f7tlh"]
+[ext_resource type="AudioStream" uid="uid://b57h7y02ppefj" path="res://sound/sfx/threat_clear.mp3" id="4_f7tlh"]
+[ext_resource type="Script" uid="uid://um715i1ogsky" path="res://src/controller/object/display_controller.gd" id="4_vdcm2"]
+[ext_resource type="Script" uid="uid://o2sutexqhrmb" path="res://src/controller/object/message_controller.gd" id="5_6rmj2"]
+[ext_resource type="AudioStream" uid="uid://b4f6idkvgntsn" path="res://sound/sfx/sysdown.wav" id="5_rlppe"]
+[ext_resource type="Script" uid="uid://c2kfukvlyw4xr" path="res://src/controller/component/alert_box_controller.gd" id="5_vdcm2"]
+[ext_resource type="AudioStream" uid="uid://du8vdjxhqvgqj" path="res://sound/sfx/sysdownvoice.mp3" id="6_catpy"]
+[ext_resource type="Script" uid="uid://clwnibpbfrknq" path="res://src/controller/component/freq_slider_controller.gd" id="6_vsj0x"]
 [ext_resource type="AudioStream" uid="uid://cvlvi5gsogg8u" path="res://sound/sfx/Type.wav" id="7_6rmj2"]
-[ext_resource type="Script" uid="uid://v008qlx7gn4k" path="res://src/controller/amp_slider_controller.gd" id="7_qsv74"]
-[ext_resource type="Script" uid="uid://djigvpcpdp0x5" path="res://src/controller/connect_controller.gd" id="8_h1mc3"]
-[ext_resource type="Script" uid="uid://c1yr5bx78d4g1" path="res://src/controller/purge_controller.gd" id="9_cgfq5"]
-[ext_resource type="Script" uid="uid://13s414chwqtd" path="res://src/controller/alien_controller.gd" id="10_7dvkv"]
+[ext_resource type="AudioStream" uid="uid://bw21ycr61prnn" path="res://sound/sfx/sysup.mp3" id="7_41akx"]
+[ext_resource type="Script" uid="uid://v008qlx7gn4k" path="res://src/controller/component/amp_slider_controller.gd" id="7_qsv74"]
+[ext_resource type="Script" uid="uid://djigvpcpdp0x5" path="res://src/controller/component/connect_controller.gd" id="8_h1mc3"]
+[ext_resource type="AudioStream" uid="uid://1xi7j072ir6o" path="res://sound/sfx/friendfire.mp3" id="8_sesyt"]
+[ext_resource type="Script" uid="uid://c1yr5bx78d4g1" path="res://src/controller/component/purge_controller.gd" id="9_cgfq5"]
+[ext_resource type="Script" uid="uid://13s414chwqtd" path="res://src/controller/game/alien_controller.gd" id="10_7dvkv"]
+[ext_resource type="AudioStream" uid="uid://ihno1rpn7dvj" path="res://sound/sfx/Click.wav" id="11_qsv74"]
+[ext_resource type="AudioStream" uid="uid://die6u3gjbh02y" path="res://sound/sfx/Hover.wav" id="12_h1mc3"]
+[ext_resource type="AudioStream" uid="uid://dv4hk2fyi8y4f" path="res://sound/sfx/error.wav" id="15_41akx"]
+[ext_resource type="AudioStream" uid="uid://bkbuvmvntk8na" path="res://sound/sfx/wave.wav" id="18_8k7j3"]
+[ext_resource type="AudioStream" uid="uid://uoehl6pesva5" path="res://sound/sfx/alarm.mp3" id="19_jkdwc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ktti3"]
 
@@ -69,6 +81,29 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
+[sub_resource type="Animation" id="Animation_jkdwc"]
+resource_name = "snooze"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"snooze_alarm"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rlppe"]
+_data = {
+&"snooze": SubResource("Animation_jkdwc")
+}
+
 [node name="Root" type="Control" unique_id=1541931026]
 material = SubResource("CanvasItemMaterial_ktti3")
 layout_mode = 3
@@ -79,6 +114,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_ktti3")
+attackVoice = ExtResource("2_cof4p")
+dataVoice = ExtResource("3_f7tlh")
+clearVoice = ExtResource("4_f7tlh")
+systemDown = ExtResource("5_rlppe")
+sysDownVoice = ExtResource("6_catpy")
+systemUp = ExtResource("7_41akx")
+friendFire = ExtResource("8_sesyt")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1944688371]
 layout_mode = 1
@@ -219,6 +261,11 @@ layout_mode = 2
 [node name="TypePlayer" type="AudioStreamPlayer2D" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=2012425467]
 stream = ExtResource("7_6rmj2")
 
+[node name="ErrorPlayer" type="AudioStreamPlayer2D" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=911449884]
+position = Vector2(-4, -4)
+stream = ExtResource("15_41akx")
+volume_db = 10.133
+
 [node name="Controls" type="VBoxContainer" parent="UI/ControlArea" unique_id=2031840487]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -258,6 +305,10 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "CONNECT"
 script = ExtResource("8_h1mc3")
+clickSound = ExtResource("11_qsv74")
+hoverSound = ExtResource("12_h1mc3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="UI/ControlArea/Controls/ButtonsContainer/ConnectButton" unique_id=1218879634]
 
 [node name="PurgeButton" type="Button" parent="UI/ControlArea/Controls/ButtonsContainer" unique_id=1952172317]
 custom_minimum_size = Vector2(100, 50)
@@ -269,6 +320,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_o6xl0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tipki")
 text = "Purge"
 script = ExtResource("9_cgfq5")
+clickSound = ExtResource("11_qsv74")
+hoverSound = ExtResource("12_h1mc3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="UI/ControlArea/Controls/ButtonsContainer/PurgeButton" unique_id=2130052554]
 
 [node name="SyncTimer" type="Timer" parent="." unique_id=427876320]
 wait_time = 30.0
@@ -293,6 +348,18 @@ Alien infiltration confirmed
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1195155915]
+
+[node name="WavePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1698263443]
+stream = ExtResource("18_8k7j3")
+
+[node name="AlarmPlayer" type="AudioStreamPlayer3D" parent="." unique_id=96421253]
+stream = ExtResource("19_jkdwc")
+volume_db = 60.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AlarmPlayer" unique_id=1882773239]
+libraries/ = SubResource("AnimationLibrary_rlppe")
 
 [connection signal="value_changed" from="UI/ControlArea/Controls/FreqSlider" to="UI/ControlArea/Controls/FreqSlider" method="_on_value_changed"]
 [connection signal="value_changed" from="UI/ControlArea/Controls/AmpSlider" to="UI/ControlArea/Controls/AmpSlider" method="_on_value_changed"]

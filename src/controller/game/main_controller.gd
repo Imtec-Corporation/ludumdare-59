@@ -13,7 +13,7 @@ func _ready() -> void:
 	GameOverEvent.register(self._on_game_over)
 
 func _process(_delta: float) -> void:
-	self.titleCam.look_at(self.station.position)
+	self.titleCam.look_at(self.station.global_position)
 
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()

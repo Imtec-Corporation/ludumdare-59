@@ -16,5 +16,5 @@ static func unregister(listener: Callable) -> void:
 	get_instance().data_loss_event.disconnect(listener)
 
 static func emit() -> void:
-	var loss: int = randi_range(10, 500)
+	var loss: int = DataProvider.new().provide()
 	get_instance().data_loss_event.emit(loss)

@@ -3,6 +3,7 @@ extends VBoxContainer
 
 var scroll: ScrollContainer
 var typePlayer: AudioStreamPlayer2D
+var errorPlayer: AudioStreamPlayer2D
 var messageTimer: Timer
 var typeTimer: Timer
 var messageQueue: Array[Dictionary] = []
@@ -27,9 +28,14 @@ func _ready() -> void:
 	MessageEvent.register(self._on_message_received)
 	self.scroll = self.get_parent() as ScrollContainer
 	self.typePlayer = $TypePlayer
+	self.errorPlayer = $ErrorPlayer
 
 func _on_message_received(message: String, isError: bool) -> void:
 	print_debug("Message received: " + message)
+	
+	if isError:
+		errorPlayer.play()
+
 	messageQueue.append({"message": message, "isError": isError})
 	if messageTimer.is_stopped():
 		messageTimer.start()
