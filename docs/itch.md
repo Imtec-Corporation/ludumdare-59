@@ -1,36 +1,41 @@
-# Signals of Earth
+<h1>Signals of Earth</h1>
 
-Earth sleeps.  
-You don’t.
+<p>Earth sleeps.<br>You don't.</p>
 
-High above the planet, inside the Vanguard Orbital Link Station, you sit alone with a wall of consoles, a stream of satellite traffic, and one classified directive:
+<p>High above the planet, inside the Vanguard Orbital Link Station, you sit alone with a wall of consoles, a stream of satellite traffic, and one classified directive:</p>
 
-**Protocol Yugen.**
+<p><strong>Protocol Yugen.</strong></p>
 
-Keep the orbital network connected. Keep data flowing. Keep alien signals out.
+<p>Keep the orbital network connected. Keep data flowing. Keep alien signals out.</p>
 
-Every dial adjustment matters. Every missed alert costs data. Every second out of sync brings the whole system closer to failure.
+<p>Every dial adjustment matters. Every missed alert costs data. Every second out of sync brings the whole system closer to failure.</p>
 
-## What you do
+<h2>What You Do</h2>
 
-You monitor and control a live satellite link console:
+<p>You monitor and control a live satellite link console:</p>
 
-- Match your station signal to active satellites.
-- Maintain synchronization to successfully transmit data.
-- React to hostile interference and alien attack patterns.
-- Prevent cascading data loss and total network collapse.
+<ul>
+  <li>Match your station signal to active satellites.</li>
+  <li>Maintain synchronization to successfully transmit data.</li>
+  <li>React to hostile interference and alien attack patterns.</li>
+  <li>Prevent cascading data loss and total network collapse.</li>
+</ul>
 
-## Controls
+<h2>Controls</h2>
 
-- **Mouse (console UI):** interact with sliders and buttons
-- **Right Mouse Button + Drag:** pan the camera view
-- **A / D:** tilt the view left and right
+<ul>
+  <li><strong>Mouse (console UI):</strong> Interact with sliders and buttons.</li>
+  <li><strong>Right Mouse Button + Drag:</strong> Pan the camera view.</li>
+  <li><strong>A / D:</strong> Tilt the view left and right.</li>
+</ul>
 
-## Quick mission brief
+<h2>Quick Mission Brief</h2>
 
-1. Start the session.
-2. Tune frequency and amplitude until links stabilize.
-3. Keep the system synchronized long enough to move data.
-4. Handle attacks fast, or watch the station fall apart.
+<ol>
+  <li>Start the session.</li>
+  <li>Tune frequency and amplitude until links stabilize.</li>
+  <li>Keep the system synchronized long enough to move data.</li>
+  <li>Handle attacks fast, or watch the station fall apart.</li>
+</ol>
 
-If the signal dies, so does the mission.
+<p>If the signal dies, so does the mission.</p>
