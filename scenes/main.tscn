@@ -217,7 +217,7 @@ script = ExtResource("1_sugp2")
 transform = Transform3D(0.1390867, -0.30637497, -0.9416949, 0.30637494, 0.9175956, -0.25328338, 0.9416949, -0.25328338, 0.22149098, 0, 0, 0)
 
 [node name="Main Cam" type="Camera3D" parent="OrbitPivot/Ship/station" unique_id=1489622258]
-transform = Transform3D(1, 0, 0, 0, 0.98579156, -0.16797325, 0, 0.16797325, 0.98579156, -0.015185356, 1.4846954, -0.30680847)
+transform = Transform3D(0.99981946, -0.016193075, 0.009951145, 0.01843035, 0.9539342, -0.29945, -0.0046437527, 0.29957926, 0.9540603, -0.015197754, 1.4846945, -0.30681038)
 environment = ExtResource("4_dp3eg")
 script = ExtResource("5_tbgi4")
 
