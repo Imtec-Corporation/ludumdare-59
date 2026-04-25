@@ -2,6 +2,7 @@ class_name MessageController
 extends VBoxContainer
 
 var scroll: ScrollContainer
+var typePlayer: AudioStreamPlayer2D
 var messageTimer: Timer
 var typeTimer: Timer
 var messageQueue: Array[Dictionary] = []
@@ -25,6 +26,7 @@ func _init() -> void:
 func _ready() -> void:
 	MessageEvent.register(self._on_message_received)
 	self.scroll = self.get_parent() as ScrollContainer
+	self.typePlayer = $TypePlayer
 
 func _on_message_received(message: String, isError: bool) -> void:
 	print_debug("Message received: " + message)
@@ -70,6 +72,7 @@ func _on_type_timer_timeout() -> void:
 		label.add_theme_color_override("font_color", Color.RED)
 
 	label.text += message
+	typePlayer.play()
 	if messageBuffer.is_empty():
 		if messageTimer.is_stopped():
 			messageTimer.start()

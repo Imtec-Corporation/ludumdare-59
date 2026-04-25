@@ -22,8 +22,7 @@ func _init() -> void:
 	DataEvent.register(self._on_data_received)
 	AttackEvent.register(self._on_attack_event)
 	DataLossEvent.register(self._on_data_lost)
-	reset()
-	initialized = true
+	initialized = false
 
 func reset() -> void:
 	self.synced = false
@@ -31,6 +30,7 @@ func reset() -> void:
 	self.shift = 0
 	if not initialized:
 		self.satSignal = SatSignal.new(sigFreqProvider.provide(), sigAmpProvider.provide())
+		initialized = true
 	self.satellite = self.satFactory.create_satellite()
 	SyncEvent.emit(false, false)
 	MessageEvent.emit("Satellite reference set: " + self.satellite.name, false)

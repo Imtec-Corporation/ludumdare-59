@@ -17,5 +17,5 @@ static func unregister(listener: Callable) -> void:
 
 static func emit() -> void:
 	var data: int = DataProvider.new().provide()
+	MessageEvent.emit("Data transmitted: " + str(data) + "MB")
 	get_instance().data_received.emit(data)
-	MessageEvent.emit("Data link established: " + str(data) + "MB")

@@ -37,13 +37,27 @@ var station_amplitude: float = 2.0
 var satellite_frequency_hz: float = 5.0
 var satellite_amplitude: float = 2.0
 var ampPct: float = 0.8
+var gameStarted: bool = false
 
 func _ready() -> void:
 	time = 0.0
+	GameStartEvent.register(self._on_game_start)
+	GameOverEvent.register(self._on_game_over)
 
 func _process(delta: float) -> void:
+	if not self.gameStarted:
+		return
+
 	time += delta * speed
 	queue_redraw()
+
+func _on_game_start() -> void:
+	self.gameStarted = true
+
+func _on_game_over() -> void:
+	self.gameStarted = false
+	GameOverEvent.unregister(self._on_game_over)
+	GameStartEvent.unregister(self._on_game_start)
 
 func _draw() -> void:
 	var w = size.x

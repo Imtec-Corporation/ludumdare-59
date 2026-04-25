@@ -4,12 +4,11 @@ extends HSlider
 var station: Station
 
 func _ready() -> void:
-	# `GameController._ready()` runs after child `_ready()` callbacks, so we bind on the next idle step.
-	call_deferred("_bind_station")
 	ResetEvent.register(self._on_reset_requested)
+	GameStartEvent.register(self._on_game_start)
+	GameOverEvent.register(self._on_game_over)
 
 func _bind_station() -> void:
-	# Root owns `station` (see `GameController` on the scene root in `scenes/main.tscn`).
 	var game_root := get_node("../../../..") as Node
 	station = game_root.get("station") as Station
 	self.value = station.satSignal.frequency
@@ -21,3 +20,10 @@ func _on_value_changed(_float) -> void:
 
 func _on_reset_requested() -> void:
 	self.value = station.satSignal.frequency
+
+func _on_game_start() -> void:
+	call_deferred("_bind_station")
+
+func _on_game_over() -> void:
+	GameOverEvent.unregister(self._on_game_over)
+	GameStartEvent.unregister(self._on_game_start)

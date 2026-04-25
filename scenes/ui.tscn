@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://o2sutexqhrmb" path="res://src/controller/message_controller.gd" id="5_6rmj2"]
 [ext_resource type="Script" uid="uid://c2kfukvlyw4xr" path="res://src/controller/alert_box_controller.gd" id="5_vdcm2"]
 [ext_resource type="Script" uid="uid://clwnibpbfrknq" path="res://src/controller/freq_slider_controller.gd" id="6_vsj0x"]
+[ext_resource type="AudioStream" uid="uid://cvlvi5gsogg8u" path="res://sound/sfx/Type.wav" id="7_6rmj2"]
 [ext_resource type="Script" uid="uid://v008qlx7gn4k" path="res://src/controller/amp_slider_controller.gd" id="7_qsv74"]
 [ext_resource type="Script" uid="uid://djigvpcpdp0x5" path="res://src/controller/connect_controller.gd" id="8_h1mc3"]
 [ext_resource type="Script" uid="uid://c1yr5bx78d4g1" path="res://src/controller/purge_controller.gd" id="9_cgfq5"]
@@ -215,6 +216,9 @@ text = "A.I. Defense protocol v4.1"
 [node name="HSeparator" type="HSeparator" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=25353007]
 layout_mode = 2
 
+[node name="TypePlayer" type="AudioStreamPlayer2D" parent="UI/ControlArea/ScrollContainer/MsgContainer" unique_id=2012425467]
+stream = ExtResource("7_6rmj2")
+
 [node name="Controls" type="VBoxContainer" parent="UI/ControlArea" unique_id=2031840487]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -268,7 +272,6 @@ script = ExtResource("9_cgfq5")
 
 [node name="SyncTimer" type="Timer" parent="." unique_id=427876320]
 wait_time = 30.0
-autostart = true
 
 [node name="Alien" type="Node" parent="." unique_id=922964977]
 script = ExtResource("10_7dvkv")

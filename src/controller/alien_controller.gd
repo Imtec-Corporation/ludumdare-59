@@ -20,8 +20,7 @@ func _ready() -> void:
 
 	AttackEvent.register(self._on_attack_event)
 	GameOverEvent.register(self._on_game_over)
-	
-	self.start_timer()
+	GameStartEvent.register(self._on_game_start)
 
 func start_timer() -> void:
 	self.prepareTimer.wait_time = randf_range(10.0, 50.0)
@@ -39,6 +38,9 @@ func _on_attack_event(attack: bool) -> void:
 	if not attack and not attackTimer.is_stopped():
 		attackTimer.stop()
 		start_timer()
+
+func _on_game_start() -> void:
+	start_timer()
 
 func _on_game_over() -> void:
 	self.prepareTimer.stop()
