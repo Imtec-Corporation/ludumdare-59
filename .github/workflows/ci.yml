@@ -120,3 +120,39 @@ jobs:
           butler -v
           butler login
           butler push build/mac ${ITCH_IO_GAME}:mac
+
+  web-build:
+    name: Web Build
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    container:
+      image: barichello/godot-ci:4.4.1
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+       # Step 2: Create an alias for Godot executable (correct path)
+      - name: Copy root config
+        run: |
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mkdir -p ~/.local/share/godot
+          mv /root/.local/share/godot/export_templates ~/.local/share/godot/export_templates
+
+       # Step 3: Run the GUT tests in headless mode
+      - name: Run GUT tests
+        run: godot --headless -s addons/gut/gut_cmdln.gd -glog=1 -gexit
+
+      # Setp 4: Build Web export
+      - name: Build Web config
+        run: |
+          mkdir -v -p build/web
+          godot --headless -v --export-release "Web" build/web/index.html
+
+      # Step 5: Publish the build to itch.io
+      - name: Publish to itch.io
+        run: |
+          butler -v
+          butler login
+          butler push build/web ${ITCH_IO_GAME}:web
