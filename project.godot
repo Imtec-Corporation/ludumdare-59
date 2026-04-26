@@ -22,6 +22,12 @@ boot_splash/image="uid://c0u34xjvwibwv"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=2000
 
+[display]
+
+window/size/mode=3
+window/size/resizable=false
+window/size/borderless=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
